@@ -1,0 +1,220 @@
+/* AboutPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.about-container {
+    font-family: "Montserrat", sans-serif;
+    background-color: #fafafa;
+    width: 100%;
+    /* max-width: 1400px; */
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    color: #333;
+    text-align: center;
+}
+
+.about-title {
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 0.5rem;
+    color: #4a4a4a;
+}
+
+.title-underline {
+    width: 30px;
+    height: 4px;
+    background-color: #7843e9;
+    margin: 0.5rem auto;
+    border-radius: 2px;
+}
+
+.about-description {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin: 1rem auto 2rem;
+    max-width: 800px;
+    color: #666;
+    padding: 0 1rem;
+}
+
+.about-content {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0px 20px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    /* max-width: 1400px; */
+}
+
+.about-section {
+    flex: 1;
+    min-width: 280px;
+    max-width:fit-content;
+    text-align: left;
+    padding: 1rem;
+}
+
+h3 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    margin-bottom: 1rem;
+    color: #4a4a4a;
+}
+
+p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.highlight {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.contact-button {
+    background-color: #5e3cff;
+    color: #fff;
+    padding: 0.8em 1.5em;
+    border: none;
+    margin-top: 1.5rem;
+    font-weight: 600;
+    border-radius: 5px;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #4b32cc;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: flex-start;
+}
+
+.skill-tag {
+    background-color: #f1f1f1;
+    color: #555;
+    padding: 0.6em 1em;
+    border-radius: 5px;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    transition: background-color 0.3s ease;
+}
+
+.skill-tag:hover {
+    background-color: #ddd;
+}
+
+#contact {
+    scroll-margin-top: 86px;
+}
+
+.education-title {
+    margin-top: 2rem;
+}
+
+.education-section {
+    margin-top: 1rem;
+}
+
+.education-item {
+    background-color: #f8f8f8;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.education-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.school-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.degree {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.education-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.period {
+    background-color: #7843e9;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.gpa {
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .education-item {
+        padding: 1rem;
+    }
+    
+    .education-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .about-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .about-section {
+        width: 100%;
+        text-align: left;
+        padding: 0 1rem;
+    }
+
+    .skills {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-container {
+        padding: 1rem 0.5rem;
+    }
+
+    .about-section {
+        padding: 0 0.5rem;
+    }
+
+    .skills {
+        gap: 0.5rem;
+    }
+
+    .skill-tag {
+        padding: 0.5em 0.8em;
+    }
+}

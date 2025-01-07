@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.certificate-container {
+  font-family: "Montserrat", serif;
+  /* max-width: 1280px; */
+  background-color: #fafafa;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .certificate-container {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .certificate-container {
+    padding: 3rem;
+  }
+}
+
+.certificate-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .certificate-title {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .certificate-title {
+    font-size: 2.5rem;
+  }
+}
+
+.certificate-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .certificate-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .certificate-subtitle {
+    margin-bottom: 3rem;
+  }
+}
+
+.certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 480px) {
+  .certificate-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .certificate-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .certificate-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.certificate-card {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+/* Remove hover effect on mobile */
+@media (hover: hover) {
+  .certificate-card:hover {
+    transform: scale(1.05);
+  }
+
+  .certificate-card:hover .certificate-overlay {
+    opacity: 1;
+  }
+}
+
+.certificate-content {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%;
+}
+
+.certificate-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.certificate-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .certificate-overlay {
+    padding: 1.5rem;
+  }
+}
+
+/* Touch device specific styles */
+@media (hover: none) {
+  .certificate-overlay {
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .certificate-card.active .certificate-overlay {
+    opacity: 1;
+  }
+}
+
+.certificate-name {
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .certificate-name {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.certificate-button {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: transparent;
+  color: white;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid #7c3aed;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .certificate-button {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+.certificate-button:hover {
+  background-color: #7c3aed;
+  color: white;
+  transform: translateY(1px);
+}
+
+.button-content {
+  font-family: "Montserrat", serif;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+@media (min-width: 640px) {
+  .button-content {
+    gap: 0.5rem;
+  }
+}
+
+.certificate-icon {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .certificate-icon {
+    font-size: 1.2rem;
+  }
+}

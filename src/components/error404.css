@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+.error-wrapper {
+  min-height: calc(100vh - 140px); /* Adjust based on your navbar and footer height */
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.glitch-container {
+    margin-top: 7rem;
+    margin-bottom: 7rem;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.glitch-text {
+  font-size: 12rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.glitch-letter {
+  position: relative;
+  animation: glitch 3s infinite;
+}
+
+.glitch-letter::before,
+.glitch-letter::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+.error-content {
+  position: relative;
+  z-index: 1;
+}
+
+.error-stack {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.stack-item {
+  width: 3px;
+  height: 40px;
+  background: #3b82f6;
+  animation: stackAnimation 1.5s ease-in-out infinite;
+}
+
+.stack-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stack-item:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.error-heading {
+  font-size: 2.5rem;
+  color: #f8fafc;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.error-description {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.code-snippet {
+  background: #1e293b;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: left;
+  margin: 2rem auto;
+  max-width: 500px;
+  font-family: 'Fira Code', monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+.code-snippet::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 65%, rgba(59, 130, 246, 0.1) 100%);
+  pointer-events: none;
+}
+
+.code-line {
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.code-number {
+  color: #64748b;
+  margin-right: 1rem;
+  user-select: none;
+}
+
+.code-keyword {
+  color: #3b82f6;
+}
+
+.code-string {
+  color: #22c55e;
+}
+
+.code-function {
+  color: #f59e0b;
+}
+
+.return-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #3b82f6;
+  color: white;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+}
+
+.return-button:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.button-arrow {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.return-button:hover .button-arrow {
+  transform: translateX(4px);
+}
+
+@keyframes glitch {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-2px) skew(2deg);
+  }
+  40% {
+    transform: translateY(2px) skew(-2deg);
+  }
+  60% {
+    transform: translateY(-1px);
+  }
+  80% {
+    transform: translateY(1px);
+  }
+}
+
+@keyframes stackAnimation {
+  0%, 100% {
+    height: 40px;
+  }
+  50% {
+    height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .glitch-text {
+    font-size: 8rem;
+  }
+  
+  .error-heading {
+    font-size: 2rem;
+  }
+  
+  .error-description {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .code-snippet {
+    margin: 2rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glitch-text {
+    font-size: 6rem;
+  }
+  
+  .error-heading {
+    font-size: 1.75rem;
+  }
+}

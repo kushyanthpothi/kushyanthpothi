@@ -1,0 +1,23 @@
+/* Prevent horizontal overflow */
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+
+/* General reset for box-sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* Main wrapper adjustments */
+.home-wrapper {
+  width: 100%; /* Ensures the wrapper takes the full width of the viewport */
+  overflow-x: hidden; /* Prevents any horizontal overflow */
+}
+
+.home-main {
+  width: 100%; /* Ensures the main content takes the full width */
+  overflow-x: hidden; /* Prevents horizontal scrolling for main content */
+}

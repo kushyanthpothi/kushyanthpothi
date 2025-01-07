@@ -1,0 +1,25 @@
+{
+  "short_name": "Kushyanth Pothineni",
+  "name": "Kushyanth Pothineni || Full Stack Developer",
+  "icons": [
+    {
+      "src": "https://st5.depositphotos.com/1029305/67070/i/450/depositphotos_670708686-stock-photo-black-lowercase-letter-icon-overlapping.jpg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "https://st5.depositphotos.com/1029305/67070/i/450/depositphotos_670708686-stock-photo-black-lowercase-letter-icon-overlapping.jpg",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://st5.depositphotos.com/1029305/67070/i/450/depositphotos_670708686-stock-photo-black-lowercase-letter-icon-overlapping.jpg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
