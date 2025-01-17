@@ -29,7 +29,7 @@ A Django-based tool for downloading YouTube videos and audio.
 - **Tools & Platforms**: Git, GitHub, imgbb API  
 
 ## 📫 Let's Connect  
-- 💬 [Linkedin](https://www.linkedin.com/in/kushyanth-pothineni/) | [Webiste](https://kushyanth-portfolio.web.app/)
+- 💬 [Linkedin](https://www.linkedin.com/in/kushyanth-pothineni/) | [Website](https://kushyanth-portfolio.web.app/)
 - 📧 Email: kushyanthpothineni2003@gmail.com  
 
 ## 🌟 Fun Facts  
