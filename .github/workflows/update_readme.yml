@@ -17,7 +17,7 @@ jobs:
           # Fetch repositories and format the output
           curl -s "https://api.github.com/users/kushyanthpothi/repos?per_page=10" | jq -r '
           .[] | 
-          "- [\(.name)](\(.html_url))\n  - Description: \(.description // "No description provided.")\n  - Languages Used: \(.language // "Not specified")\n  - Last Updated: \(.updated_at)\n"' > repo_list.md
+          "- [\(.name)](\(.html_url))\n  - Description: \(.description // "No description provided.")\n  - Languages Used: \(.language // "Not specified")\n  - Last Updated: \(.updated_at | split("T")[0] | split("-") | .[2] + "-" + .[1] + "-" + .[0])\n"' > repo_list.md
 
           # Insert the updated content in README.md
           awk -v content="$(cat repo_list.md)" '
