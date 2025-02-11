@@ -3,7 +3,7 @@ name: Update README with Latest Repositories
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs daily at midnight
-  workflow_dispatch:  # Allows manual triggering
+  workflow_dispatch:  # Allows manual trigger
 
 jobs:
   update-readme:
@@ -14,7 +14,7 @@ jobs:
 
       - name: Fetch Repositories and Update README
         run: |
-          curl -s https://api.github.com/users/kushyanthpothi/repos?per_page=100 | jq -r '.[] | "- [\(.name)](\(.html_url))\n  - Description: \(.description // "No description provided.")\n  - Languages Used: \(.language)\n  - Last Updated: \(.updated_at)"' > repo_list.md
+          curl -s https://api.github.com/users/kushyanthpothi/repos?per_page=10 | jq -r '.[] | "- [\(.name)](\(.html_url))\n  - Description: \(.description // "No description provided.")\n  - Languages Used: \(.language)\n  - Last Updated: \(.updated_at)"' > repo_list.md
           sed -i '/<!-- REPO-LIST-START -->/,/<!-- REPO-LIST-END -->/c\<!-- REPO-LIST-START -->\n\n'$(cat repo_list.md)'\n\n<!-- REPO-LIST-END -->' README.md
           rm repo_list.md
 
