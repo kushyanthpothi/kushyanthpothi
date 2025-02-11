@@ -42,27 +42,27 @@
 - [EventMania](https://github.com/kushyanthpothi/EventMania)
   - Description: Event Mania is a dynamic platform connecting students and colleges through events. Discover, register, and manage events effortlessly with this all-in-one event management solution!
   - Languages Used: JavaScript
-  - Last Updated: 2025-02-11T06:22:33Z
+  - Last Updated: 11-02-2025
 
 - [kushyanthpothi](https://github.com/kushyanthpothi/kushyanthpothi)
   - Description: Config files for my GitHub profile.
   - Languages Used: JavaScript
-  - Last Updated: 2025-02-11T08:17:33Z
+  - Last Updated: 11-02-2025
 
 - [pin-noter](https://github.com/kushyanthpothi/pin-noter)
   - Description: No description provided.
   - Languages Used: JavaScript
-  - Last Updated: 2025-01-22T17:29:00Z
+  - Last Updated: 22-01-2025
 
 - [ProReader](https://github.com/kushyanthpothi/ProReader)
   - Description: Pro Reader is a versatile Android app that simplifies text-related tasks, offering features like QR code scanning, speech-to-text, text-to-speech, and image-to-text conversion. Empower your productivity with this all-in-one tool!
   - Languages Used: Java
-  - Last Updated: 2025-01-01T11:10:28Z
+  - Last Updated: 01-01-2025
 
 - [ytdownloader](https://github.com/kushyanthpothi/ytdownloader)
   - Description: Django-based YouTube video and audio downloader with resolution selection and format conversion support. Features include downloading videos in MP4 and audio in MP3 formats with smooth functionality.
   - Languages Used: HTML
-  - Last Updated: 2025-01-02T04:48:43Z
+  - Last Updated: 02-01-2025
 <!-- REPO-LIST-END -->
 
 > **Note:** This section dynamically updates as new repositories are added.
