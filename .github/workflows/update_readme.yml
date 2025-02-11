@@ -2,7 +2,7 @@ name: Update README with Latest Repositories
 
 on:
   schedule:
-    - cron: '* * * * *'  # Runs daily at midnight
+    - cron: '0 0 * * *'  # Runs daily at midnight
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
@@ -14,14 +14,19 @@ jobs:
 
       - name: Fetch Repositories and Update README
         run: |
-          curl -s https://api.github.com/users/kushyanthpothi/repos?per_page=10 | jq -r '.[] | "- [\(.name)](\(.html_url))\n  - Description: \(.description // "No description provided.")\n  - Languages Used: \(.language)\n  - Last Updated: \(.updated_at)"' > repo_list.md
-          sed -i '/<!-- REPO-LIST-START -->/,/<!-- REPO-LIST-END -->/c\<!-- REPO-LIST-START -->\n\n'$(cat repo_list.md)'\n\n<!-- REPO-LIST-END -->' README.md
+          curl -s "https://api.github.com/users/kushyanthpothi/repos?per_page=10" | jq -r '
+          .[] | 
+          "- [\(.name)](\(.html_url))\n  - Description: \(.description // "No description provided.")\n  - Languages Used: \(.language // "Not specified")\n  - Last Updated: \(.updated_at)\n"' > repo_list.md
+          
+          sed -i '/<!-- REPO-LIST-START -->/,/<!-- REPO-LIST-END -->/c\<!-- REPO-LIST-START -->\n'$(cat repo_list.md)'\n<!-- REPO-LIST-END -->' README.md
           rm repo_list.md
 
       - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add README.md
-          git commit -m "Update repository list in README"
-          git push
+          git commit -m "Update repository list in README" || exit 0  # Avoid error if no changes
+          git push origin main
