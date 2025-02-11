@@ -38,10 +38,10 @@
 ---
 
 ## 📂 **Repositories**
-<!-- Dynamic Repository List -->
-<!-- This section will be automatically updated -->
-<!-- START_SECTION:repositories -->
-<!-- END_SECTION:repositories -->
+
+<!-- REPO-LIST-START -->
+<!-- REPO-LIST-END -->
+
 
 > **Note:** This section dynamically updates as new repositories are added.
 
