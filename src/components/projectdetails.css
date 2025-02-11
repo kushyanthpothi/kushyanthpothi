@@ -6,9 +6,121 @@
     margin: 0 auto;
 }
 
+.background-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 120px);
+    grid-template-rows: repeat(auto-fill, 120px);
+    gap: 20px;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.diamond {
+    width: 100px;
+    height: 100px;
+    background-color: #f1f1f1;
+    transform: rotate(45deg);
+    opacity: 0.8;
+    margin: auto;
+}
+
+.main-content-1 {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+    z-index: 1;
+}
+
+.description {
+    margin-right: 200px;
+}
+
+.button-group-1 {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+/* Demo Button Styles */
+.demo-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    background-color: #1a73e8;
+    /* Dark blue color */
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.demo-button:hover {
+    background-color: #1557b0;
+    /* Darker blue on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .button-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .background-pattern {
+        position: absolute;
+        width: 120%;
+        height: 120%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 120px);
+        grid-template-rows: repeat(auto-fill, 120px);
+        gap: 20px;
+        top: 0;
+        left: 0;
+        z-index: 0;
+    }
+
+    .description {
+        margin: 20px;
+        text-align: center;
+
+    }
+
+    .main-title {
+        text-align: center;
+    }
+
+    .github-button,
+    .demo-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .button-group-1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Centers buttons horizontally */
+        gap: 10px;
+        padding: 0 50px;
+    }
+}
+
 .laptop-image {
     width: 70%;
-    
+
     height: auto;
     border-radius: 8px;
     /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); */
@@ -69,7 +181,7 @@
 
 /* Tools Section Styles */
 .tools-section {
-    
+
     margin: 0 auto;
     padding: 40px 100px;
 }

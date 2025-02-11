@@ -15,6 +15,8 @@ function App() {
         <Route path="/project/event-mania" element={<ProjectDetails projectKey="eventMania" />} />
         <Route path="/project/youtube-downloader" element={<ProjectDetails projectKey="youtubeDownloader" />} />
         <Route path="/project/pro-reader" element={<ProjectDetails projectKey="proReader" />} />
+        <Route path="/project/pin-noter" element={<ProjectDetails projectKey="pinNoter" />} />
+        
         <Route path="*" element={<Error404 />} /> {/* Catch-all route */}
       </Routes>
       <Footer />

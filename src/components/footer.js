@@ -54,9 +54,8 @@ const Footer = () => {
         <div className="footer-main">
           <h2 className="footer-name">Kushyanth Pothineni</h2>
           <p className="footer-description">
-            A Full Stack Developer specializing in building end-to-end web solutions.
-            From crafting engaging user interfaces to developing robust backend systems,
-            I create scalable applications that deliver exceptional user experiences.
+
+I am a passionate and dedicated tech enthusiast with a strong foundation in web and app development. I enjoy creating user-friendly solutions that simplify complex tasks and enhance productivity. With hands-on experience in diverse projects, I continuously seek opportunities to learn, grow, and contribute meaningfully to the tech community.
           </p>
         </div>
 
@@ -106,7 +105,7 @@ const Footer = () => {
         <div className="footer-copyright">
           <p>
             © Copyright {new Date().getFullYear()}. Developed By {' '}
-            <a href="#">Kushyanth Pothineni 💻</a>
+            <a href="https://github.com/kushyanthpothi" target='_blank'>Kushyanth Pothineni 💻</a>
           </p>
         </div>
         {showScrollButton && (

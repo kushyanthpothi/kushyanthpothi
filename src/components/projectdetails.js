@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './projectdetails.css';
-import { Github } from 'lucide-react';
+import { Github, Globe } from 'lucide-react';
 
 const projectsData = {
     eventMania: {
@@ -13,7 +13,8 @@ const projectsData = {
         ],
         tools: ["React.js", "Firebase Realtime Database", "HTML5", "CSS3", "Firebase Auth"],
         projectLink: "https://github.com/kushyanthpothi/EventMania",
-        image: "https://i.ibb.co/gJQKjNK/Event-Mania-Design.png"
+        image: "https://i.ibb.co/gJQKjNK/Event-Mania-Design.png",
+        viewSiteLink: "https://ap-event-mania.web.app/"
     },
     youtubeDownloader: {
         title: "YouTube Video and Audio Downloader",
@@ -36,8 +37,21 @@ const projectsData = {
         tools: ["Java/Kotlin", "Firebase", "ML Kit", "Android"],
         projectLink: "https://github.com/kushyanthpothi/ProReader",
         image: "https://i.ibb.co/sQYYbks/Pro-Reader-Banner-web-1.png"
+    },
+    pinNoter: {
+        title: "Pin Noter",
+        description: "Pin Noter is a React-based note-taking application offering rich text formatting options like bold, underline, and lists. It supports offline caching for seamless note-taking without logging in and automatically syncs notes to the cloud upon login. Users can pin, delete, and access their notes from anywhere with ease.",
+        overview: [
+            "Pin Noter offers a feature-rich platform for managing notes effectively. Users can format their notes with bold, underline, strikethrough, and list options (bullet and numbered), pin important notes, and delete unwanted ones. The app is designed to enhance productivity with its user-friendly interface and efficient features.",
+            "One of the key highlights is its offline mode, where notes are stored in cache memory without logging in. Upon logging into an account, the notes are automatically synced to the cloud, ensuring data safety and accessibility. With secure cloud storage, users can access their notes from anywhere, anytime."
+        ],
+        tools: ["React.js", "Firebase", "CSS3","React-dom"],
+        projectLink: "https://github.com/kushyanthpothi/pin-noter",
+        image: "https://i.ibb.co/zNYpwtk/Untitled-design.png",
+        viewSiteLink: "https://pin-noter.web.app/",
     }
 };
+
 
 
 const ProjectDetails = ({ projectKey }) => {
@@ -63,10 +77,10 @@ const ProjectDetails = ({ projectKey }) => {
                         <div key={index} className="diamond"></div>
                     ))}
                 </div>
-                <div className="main-content">
+                <div className="main-content-1">
                     <h1 className="main-title">{project.title}</h1>
                     <p className="description">{project.description}</p>
-                    <div className="button-group">
+                    <div className="button-group-1">
                         <a
                             href={project.projectLink}
                             target="_blank"
@@ -76,6 +90,17 @@ const ProjectDetails = ({ projectKey }) => {
                             <Github size={20} />
                             <span>View on GitHub</span>
                         </a>
+                        {project.viewSiteLink && (
+                            <a
+                                href={project.viewSiteLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="demo-button"
+                            >
+                                <Globe size={20} />
+                                <span>View Demo</span>
+                            </a>
+                        )}
                     </div>
                 </div>
                 <div className="scroll-indicator">
@@ -117,23 +142,34 @@ const ProjectDetails = ({ projectKey }) => {
                         <Github size={20} />
                         <span>View on GitHub</span>
                     </a>
+                    {project.viewSiteLink && (
+                        <a
+                            href={project.viewSiteLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="demo-button"
+                        >
+                            <Globe size={20} />
+                            <span>View Demo</span>
+                        </a>
+                    )}
                     <button
                         className="go-back-button"
                         onClick={() => {
                             window.scrollTo({
                                 top: 0,
-                                behavior: 'smooth', // Smooth scrolling
+                                behavior: 'smooth',
                             });
-                            navigate('/'); // Navigates to the home page
+                            navigate('/');
                         }}
                     >
                         GO BACK
                     </button>
-
                 </div>
             </div>
         </div>
     );
 };
+
 
 export default ProjectDetails;

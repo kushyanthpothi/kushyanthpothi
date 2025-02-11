@@ -48,6 +48,10 @@
   color: #111827;
 }
 
+.title-logo{
+  text-decoration: none;
+}
+
 .nav-links {
   display: flex;
   gap: 1.8rem;

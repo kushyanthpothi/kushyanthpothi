@@ -64,11 +64,11 @@ const Navbar = () => {
         <div className="navbar-left">
           <div className="profile-image">
             <img 
-              src="https://i.ibb.co/S6tLC6s/Snapchat-299913884.jpg"
+              src="https://i.ibb.co/5kKhz6T/Passport-Photo.jpg"
               alt="Profile"
             />
           </div>
-          <h1 className="navbar-title">Kushyanth Pothineni</h1>
+          <Link to="/" className='title-logo' onClick={(e) => handleNavigation('/', 'home', e)}><h1 className="navbar-title">Kushyanth Pothineni</h1></Link>
         </div>
         
         <div className="nav-links desktop-nav">

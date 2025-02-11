@@ -10,14 +10,14 @@ const AboutPage = () => {
     };
 
     const skills = [
-        "C", "Java", "Python", "HTML", "CSS", "JavaScript", "SQL", "MongoDB", "Firebase", "React", "Django"
+        "C", "Java", "Python", "HTML", "CSS", "JavaScript", "SQL", "MongoDB", "Firebase", "React", "Django","Figma","Excel"
     ];
 
     const education = [
         {
             school: "KKR & KSR Institute of Technology and Sciences",
             degree: "Bachelor of Technology Computer Science",
-            period: "2021 - Present",
+            period: "2021 - 2025",
             gpa: "7.89"
         },
         {
@@ -45,16 +45,16 @@ const AboutPage = () => {
                 <div className="about-section about-left">
                     <h3>Get to know me!</h3>
                     <p>
-                        I'm a driven <span className="highlight">Full Stack Developer</span> with expertise in both frontend and backend development. I specialize in building complete web applications from the ground up - from designing responsive user interfaces to implementing robust server-side logic and database architectures.
+                    I am a motivated and results-driven individual passionate about leveraging technology to create <span className="highlight">impactful solutions.</span> My journey in the tech world is built on a foundation of continuous learning and hands-on experience in <span className="highlight">developing innovative applications.</span> I take pride in my ability to approach challenges with a problem-solving mindset and a commitment to delivering high-quality results.
                     </p>
                     <p>
-                        On the frontend, I excel in <span className="highlight">React.js, JavaScript, and modern CSS</span> to create intuitive user experiences. For backend development, I'm proficient with <span className="highlight">Node.js, Express, and Python Django</span>, implementing RESTful APIs and microservices. I have extensive experience with both SQL and NoSQL databases.
+                    With a <span className="highlight">strong academic background</span> and certifications in modern development technologies, I have honed my skills to contribute effectively to dynamic teams. <span className="highlight">My experiences</span> include designing user-friendly web applications, enhancing user engagement, and optimizing application performance. I believe in staying current with <span className="highlight">emerging trends</span> to ensure the solutions I develop remain relevant and effective.
                     </p>
                     <p>
-                        Beyond my technical skills, I'm passionate about <span className="highlight">continuous learning</span> and staying current with emerging technologies. I've completed several certifications, including Responsive Web Design from FreeCodeCamp and Java Full Stack Development from Wipro, demonstrating my commitment to professional growth. My diverse project portfolio, from Event Mania to Pro Reader, showcases my ability to tackle various development challenges.
+                        Beyond my technical skills, I'm passionate about <span className="highlight">continuous learning</span> and staying current with emerging technologies. I've completed several certifications, including <span className="highlight">Responsive Web Design</span> from FreeCodeCamp and <span className="highlight">Java Full Stack Development</span> from Wipro, demonstrating my commitment to professional growth. My diverse project portfolio, from <span className="highlight">Event Mania to Pro Reader</span>, showcases my ability to tackle various development challenges.
                     </p>
                     <p>
-                        I thrive in collaborative environments and have experience working on team projects. Whether it's <span className="highlight">developing new features</span>, optimizing performance, or solving complex technical challenges, I approach each task with enthusiasm and dedication. I'm always eager to take on new challenges and contribute to innovative solutions that make a real impact.
+                    Over the years, I have worked on diverse projects that highlight my adaptability and dedication to <span className="highlight">achieving excellence.</span> From creating tools that improve productivity to building platforms that simplify complex tasks, I have consistently demonstrated <span className="highlight">a passion for innovation.</span> My projects are a testament to my ability to blend technical expertise with creativity.
                     </p>
                     <button className="contact-button" onClick={handleContactClick}>CONTACT</button>
                 </div>

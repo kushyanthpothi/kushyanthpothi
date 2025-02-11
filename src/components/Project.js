@@ -1,9 +1,11 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import './Project.css';
 
 const Project = () => {
   const navigate = useNavigate();
+  const [showAll, setShowAll] = useState(false);
+  
 
   const projects = [
     {
@@ -23,15 +25,30 @@ const Project = () => {
       image: "https://i.ibb.co/sQYYbks/Pro-Reader-Banner-web-1.png",
       description: "Pro Reader is a productivity tool that enhances reading experiences by providing advanced features like text-to-speech, annotation, and customizable reading modes.",
       caseStudyLink: "/project/pro-reader"
+    },
+    {
+      name: "Pin Noter",
+      image: "https://i.ibb.co/zNYpwtk/Untitled-design.png",
+      description: "Pin Noter is a powerful React-based note-taking app with rich text formatting, offline mode, and cloud sync for seamless accessibility.",
+      caseStudyLink: "/project/pin-noter"
     }
   ];  
 
   const handleCaseStudyClick = (link, e) => {
     e.preventDefault();
-    // Scroll to top before navigation
     window.scrollTo(0, 0);
-    // Navigate to the case study page
     navigate(link);
+  };
+
+  const handleViewMore = () => {
+    setShowAll(true);
+    // Smooth scroll to the next hidden project
+    setTimeout(() => {
+      const hiddenProjects = document.querySelector('.hidden-project');
+      if (hiddenProjects) {
+        hiddenProjects.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   };
 
   return (
@@ -44,7 +61,13 @@ const Project = () => {
       
       <div className="projects-content">
         {projects.map((project, index) => (
-          <div className="project-item" key={index}>
+          <div 
+            className={`project-item ${index >= 3 ? 'hidden-project' : ''} ${
+              showAll ? 'visible' : ''
+            }`}
+            key={index}
+            style={{ display: index >= 3 && !showAll ? 'none' : 'flex' }}
+          >
             <div className="project-img">
               <img src={project.image} alt={project.name} />
             </div>
@@ -62,6 +85,12 @@ const Project = () => {
           </div>
         ))}
       </div>
+
+      {!showAll && projects.length > 3 && (
+        <button className="view-more-btn" onClick={handleViewMore}>
+          View More <span className="arrow-down">↓</span>
+        </button>
+      )}
     </div>
   );
 };
