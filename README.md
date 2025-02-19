@@ -47,12 +47,12 @@
 - [kushyanthpothi](https://github.com/kushyanthpothi/kushyanthpothi)
   - Description: Config files for my GitHub profile.
   - Languages Used: JavaScript
-  - Last Updated: 11-02-2025
+  - Last Updated: 19-02-2025
 
 - [pin-noter](https://github.com/kushyanthpothi/pin-noter)
   - Description: Pin-Noter is a sleek and powerful React-based note-taking application designed for seamless note management. With an intuitive UI and a modern design, users can effortlessly create, edit, delete, and pin notes, enhancing productivity like never before.
   - Languages Used: JavaScript
-  - Last Updated: 11-02-2025
+  - Last Updated: 19-02-2025
 
 - [ProReader](https://github.com/kushyanthpothi/ProReader)
   - Description: Pro Reader is a versatile Android app that simplifies text-related tasks, offering features like QR code scanning, speech-to-text, text-to-speech, and image-to-text conversion. Empower your productivity with this all-in-one tool!
