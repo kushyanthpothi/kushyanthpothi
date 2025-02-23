@@ -44,6 +44,11 @@
   - Languages Used: JavaScript
   - Last Updated: 11-02-2025
 
+- [instans](https://github.com/kushyanthpothi/instans)
+  - Description: No description provided.
+  - Languages Used: JavaScript
+  - Last Updated: 23-02-2025
+
 - [kushyanthpothi](https://github.com/kushyanthpothi/kushyanthpothi)
   - Description: Config files for my GitHub profile.
   - Languages Used: JavaScript
