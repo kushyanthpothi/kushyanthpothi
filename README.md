@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<!-- Profile Banner with Typing Animation -->
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=4000&pause=1000&color=36BCF7&center=true&vCenter=true&width=700&height=60&lines=%F0%9F%91%8B+Hey+there!+I'm+Kushyanth+Pothineni;%E2%9A%A1+Passionate+Full-Stack+Developer;%F0%9F%9A%80+Building+Innovative+Tech+Solutions!" />
+</p>
 
-## Getting Started
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=kushyanthpothi&label=Profile%20Views&color=0e75b6&style=flat-square" alt="Profile Views" />
+</p>
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 **About Me**
+🎯 **Passionate Developer** | **Tech Enthusiast** | **Innovator**  
+🔭 Crafting intuitive and impactful **web applications**  
+🌱 Always **learning & improving** in **web development, backend systems, and AI**  
+💡 Exploring **modern UI/UX trends** to make tech accessible and engaging  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🎨 **Tech Stack**
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=react,html,css,js,ts,python,django,nodejs,express,mysql,firebase,git,github,figma" />
+</p>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🏆 **GitHub Stats & Activity**
 
-To learn more about Next.js, take a look at the following resources:
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=kushyanthpothi&show_icons=true&theme=modern&include_all_commits=true&count_private=true" width="400px" alt="GitHub Stats"/>
+  <img src="https://github-readme-streak-stats.herokuapp.com?user=kushyanthpothi&theme=modern&hide_border=false" width="400px" alt="GitHub Streak"/>
+</p>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<p align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=kushyanthpothi&theme=react-dark&hide_border=true&area=true" width="800px" alt="GitHub Activity"/>
+</p>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📂 **Repositories**
+<!-- REPO-LIST-START -->
+- [EventMania](https://github.com/kushyanthpothi/EventMania)
+  - Description: Event Mania is a dynamic platform connecting students and colleges through events. Discover, register, and manage events effortlessly with this all-in-one event management solution!
+  - Languages Used: JavaScript
+  - Last Updated: 11-02-2025
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [instans](https://github.com/kushyanthpothi/instans)
+  - Description: Instans is an AI-powered interview preparation assistant that combines real-time screen sharing with intelligent chat capabilities. The platform leverages Google's Generative AI to provide personalized interview coaching, technical problem-solving guidance, and resume analysis. With features like voice input, dark/light theme support.
+  - Languages Used: JavaScript
+  - Last Updated: 28-02-2025
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [kushyanthpothi](https://github.com/kushyanthpothi/kushyanthpothi)
+  - Description: Config files for my GitHub profile.
+  - Languages Used: JavaScript
+  - Last Updated: 23-02-2025
+
+- [pin-noter](https://github.com/kushyanthpothi/pin-noter)
+  - Description: Pin-Noter is a sleek and powerful React-based note-taking application designed for seamless note management. With an intuitive UI and a modern design, users can effortlessly create, edit, delete, and pin notes, enhancing productivity like never before.
+  - Languages Used: JavaScript
+  - Last Updated: 19-02-2025
+
+- [ProReader](https://github.com/kushyanthpothi/ProReader)
+  - Description: Pro Reader is a versatile Android app that simplifies text-related tasks, offering features like QR code scanning, speech-to-text, text-to-speech, and image-to-text conversion. Empower your productivity with this all-in-one tool!
+  - Languages Used: Java
+  - Last Updated: 19-02-2025
+
+- [ytdownloader](https://github.com/kushyanthpothi/ytdownloader)
+  - Description: Django-based YouTube video and audio downloader with resolution selection and format conversion support. Features include downloading videos in MP4 and audio in MP3 formats with smooth functionality.
+  - Languages Used: HTML
+  - Last Updated: 02-01-2025
+<!-- REPO-LIST-END -->
+
+> **Note:** This section dynamically updates as new repositories are added.
+
+---
+
+## 📫 **Let's Connect!**
+<p align="center">
+  <a href="https://www.linkedin.com/in/kushyanth-pothineni/">
+    <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin" alt="LinkedIn" />
+  </a>
+  <a href="https://kushyanth-portfolio.web.app/">
+    <img src="https://img.shields.io/badge/Website-Portfolio-blueviolet?style=for-the-badge&logo=google-chrome" alt="Portfolio" />
+  </a>
+  <a href="mailto:kushyanthpothineni2003@gmail.com">
+    <img src="https://img.shields.io/badge/Email-Gmail-red?style=for-the-badge&logo=gmail" alt="Email" />
+  </a>
+</p>
+
+---
+
+## 🎨 **Fun Facts**
+💡 I love solving **complex problems** that make technology more accessible.  
+🎮 When I’m not coding, I explore **new tools, technologies, and games**.  
+
+---
+
+🚀 **Let’s Innovate & Build the Future Together!**
