@@ -15,7 +15,7 @@
 🌱 Always **learning & improving** in **web development, backend systems, and AI**  
 💡 Exploring **modern UI/UX trends** to make tech accessible and engaging  
 
----
+--- 
 
 ## 🎨 **Tech Stack**
 <p align="center">
