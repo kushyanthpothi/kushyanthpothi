@@ -1,9 +1,9 @@
-name: Update README with Latest Repositories
+name: Auto-Update README with Latest Repositories
 
 on:
   schedule:
-    # Run daily at 00:00 UTC
-    - cron: '0 0 * * *'
+    # Run daily at 6:00 AM IST (00:30 UTC)
+    - cron: '30 0 * * *'
   workflow_dispatch:
   push:
     branches: [ main ]
@@ -11,111 +11,140 @@ on:
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
-    - name: Checkout repository
+    - name: 🔄 Checkout Repository
       uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
         
-    - name: Set up GitHub CLI
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        
-    - name: Update README with repositories
+    - name: 🚀 Update README with Latest Repositories
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        USERNAME: ${{ github.repository_owner }}
+        USERNAME: kushyanthpothi
       run: |
+        echo "🔍 Fetching repositories for $USERNAME..."
+        
         # Function to format date from ISO to DD-MM-YYYY
         format_date() {
-          date -d "$1" +"%d-%m-%Y" 2>/dev/null || echo "Unknown"
+          if command -v gdate >/dev/null 2>&1; then
+            gdate -d "$1" +"%d-%m-%Y" 2>/dev/null || echo "Unknown"
+          else
+            date -d "$1" +"%d-%m-%Y" 2>/dev/null || echo "Unknown"
+          fi
         }
         
-        # Fetch repositories using GitHub API
-        echo "Fetching repositories for $USERNAME..."
-        
-        # Get all public repositories, sorted by updated date
-        REPOS=$(curl -s \
+        # Fetch all public repositories
+        REPOS_DATA=$(curl -s \
           -H "Authorization: token $GITHUB_TOKEN" \
           -H "Accept: application/vnd.github.v3+json" \
           "https://api.github.com/users/$USERNAME/repos?type=public&sort=updated&direction=desc&per_page=100")
         
-        # Start building the repository list
-        REPO_LIST=""
+        # Check if API call was successful
+        if echo "$REPOS_DATA" | jq -e '.message' >/dev/null 2>&1; then
+          echo "❌ API Error: $(echo "$REPOS_DATA" | jq -r '.message')"
+          exit 1
+        fi
         
-        # Process each repository (excluding the profile repo)
-        echo "$REPOS" | jq -r '.[] | select(.name != "'$USERNAME'") | @base64' | while read -r repo; do
-          # Decode the base64 encoded repo data
-          REPO_DATA=$(echo "$repo" | base64 --decode)
+        echo "📊 Processing repository data..."
+        
+        # Create temporary file for repository list
+        TEMP_REPO_LIST="temp_repo_list.md"
+        > "$TEMP_REPO_LIST"
+        
+        # Process repositories and exclude profile repo
+        echo "$REPOS_DATA" | jq -r '.[] | select(.name != "kushyanthpothi") | @json' | while read -r repo_json; do
+          # Extract repository details
+          NAME=$(echo "$repo_json" | jq -r '.name')
+          DESCRIPTION=$(echo "$repo_json" | jq -r '.description // "No description available."')
+          LANGUAGE=$(echo "$repo_json" | jq -r '.language // "Markdown"')
+          HTML_URL=$(echo "$repo_json" | jq -r '.html_url')
+          UPDATED_AT=$(echo "$repo_json" | jq -r '.updated_at')
           
-          # Extract repository information
-          NAME=$(echo "$REPO_DATA" | jq -r '.name')
-          DESCRIPTION=$(echo "$REPO_DATA" | jq -r '.description // "No description available."')
-          LANGUAGE=$(echo "$REPO_DATA" | jq -r '.language // "Unknown"')
-          HTML_URL=$(echo "$REPO_DATA" | jq -r '.html_url')
-          UPDATED_AT=$(echo "$REPO_DATA" | jq -r '.updated_at')
-          
-          # Format the date
+          # Format the update date
           FORMATTED_DATE=$(format_date "$UPDATED_AT")
           
-          # Truncate long descriptions
+          # Truncate long descriptions (max 150 characters)
           if [ ${#DESCRIPTION} -gt 150 ]; then
             DESCRIPTION="${DESCRIPTION:0:147}..."
           fi
           
-          # Add to repository list
-          cat >> temp_repos.txt << EOF
-- [$NAME]($HTML_URL)
-  - Description: $DESCRIPTION
-  - Languages Used: $LANGUAGE
-  - Last Updated: $FORMATTED_DATE
+          # Append to repository list
+          cat >> "$TEMP_REPO_LIST" << EOF
+        - [$NAME]($HTML_URL)
+          - Description: $DESCRIPTION
+          - Languages Used: $LANGUAGE
+          - Last Updated: $FORMATTED_DATE
 
-EOF
+        EOF
         done
         
-        # Read the current README
-        cp README.md README_backup.md
+        echo "📝 Updating README.md..."
         
-        # Find the start and end markers
+        # Find line numbers for markers
         START_LINE=$(grep -n "<!-- REPO-LIST-START -->" README.md | cut -d: -f1)
         END_LINE=$(grep -n "<!-- REPO-LIST-END -->" README.md | cut -d: -f1)
         
-        if [ -n "$START_LINE" ] && [ -n "$END_LINE" ]; then
-          echo "Updating repository list..."
-          
-          # Create new README with updated repository list
-          head -n $START_LINE README.md > README_new.md
-          
-          # Add the repository list
-          if [ -f temp_repos.txt ]; then
-            cat temp_repos.txt >> README_new.md
-          fi
-          
-          # Add the rest of the README
-          tail -n +$END_LINE README.md >> README_new.md
-          
-          # Replace the original README
-          mv README_new.md README.md
-          
-          echo "✅ README.md updated successfully!"
-        else
-          echo "❌ Could not find repository section markers in README.md"
+        if [ -z "$START_LINE" ] || [ -z "$END_LINE" ]; then
+          echo "❌ Repository list markers not found in README.md"
+          echo "Please ensure you have <!-- REPO-LIST-START --> and <!-- REPO-LIST-END --> markers"
           exit 1
         fi
         
-        # Clean up temporary files
-        rm -f temp_repos.txt README_backup.md
+        echo "🔧 Found markers at lines $START_LINE and $END_LINE"
         
-    - name: Commit changes
+        # Create new README with updated content
+        {
+          # Content before the start marker
+          head -n "$START_LINE" README.md
+          
+          # Insert the repository list
+          cat "$TEMP_REPO_LIST"
+          
+          # Content from end marker onwards
+          tail -n +$END_LINE README.md
+        } > README_new.md
+        
+        # Replace the original README
+        mv README_new.md README.md
+        
+        # Clean up
+        rm -f "$TEMP_REPO_LIST"
+        
+        echo "✅ README.md updated successfully!"
+        
+        # Show some stats
+        REPO_COUNT=$(echo "$REPOS_DATA" | jq '[.[] | select(.name != "kushyanthpothi")] | length')
+        echo "📈 Updated with $REPO_COUNT repositories"
+        
+    - name: 📤 Commit and Push Changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add README.md
-        if git diff --staged --quiet; then
-          echo "No changes to commit"
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        
+        # Check if there are changes to commit
+        if git diff --quiet README.md; then
+          echo "📋 No changes detected in README.md"
         else
-          git commit -m "🤖 Auto-update README with latest repositories"
-          git push
+          echo "💾 Committing changes..."
+          git add README.md
+          git commit -m "🤖 Auto-update README with latest repositories
+
+          🔄 Updated on: $(date -u +'%Y-%m-%d %H:%M:%S UTC')
+          📊 Triggered by: ${{ github.event_name }}
+          🚀 Workflow: ${{ github.workflow }}"
+          
+          git push origin main
+          echo "🎉 Changes pushed successfully!"
         fi
+        
+    - name: 📋 Summary
+      run: |
+        echo "## 🎯 Automation Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Repository data fetched successfully" >> $GITHUB_STEP_SUMMARY
+        echo "- 📝 README.md updated with latest repositories" >> $GITHUB_STEP_SUMMARY
+        echo "- 🕐 Last updated: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+        echo "- 🔗 Profile: https://github.com/kushyanthpothi" >> $GITHUB_STEP_SUMMARY
