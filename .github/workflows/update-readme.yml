@@ -1,0 +1,121 @@
+name: Update README with Latest Repositories
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Set up GitHub CLI
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Update README with repositories
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        USERNAME: ${{ github.repository_owner }}
+      run: |
+        # Function to format date from ISO to DD-MM-YYYY
+        format_date() {
+          date -d "$1" +"%d-%m-%Y" 2>/dev/null || echo "Unknown"
+        }
+        
+        # Fetch repositories using GitHub API
+        echo "Fetching repositories for $USERNAME..."
+        
+        # Get all public repositories, sorted by updated date
+        REPOS=$(curl -s \
+          -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          "https://api.github.com/users/$USERNAME/repos?type=public&sort=updated&direction=desc&per_page=100")
+        
+        # Start building the repository list
+        REPO_LIST=""
+        
+        # Process each repository (excluding the profile repo)
+        echo "$REPOS" | jq -r '.[] | select(.name != "'$USERNAME'") | @base64' | while read -r repo; do
+          # Decode the base64 encoded repo data
+          REPO_DATA=$(echo "$repo" | base64 --decode)
+          
+          # Extract repository information
+          NAME=$(echo "$REPO_DATA" | jq -r '.name')
+          DESCRIPTION=$(echo "$REPO_DATA" | jq -r '.description // "No description available."')
+          LANGUAGE=$(echo "$REPO_DATA" | jq -r '.language // "Unknown"')
+          HTML_URL=$(echo "$REPO_DATA" | jq -r '.html_url')
+          UPDATED_AT=$(echo "$REPO_DATA" | jq -r '.updated_at')
+          
+          # Format the date
+          FORMATTED_DATE=$(format_date "$UPDATED_AT")
+          
+          # Truncate long descriptions
+          if [ ${#DESCRIPTION} -gt 150 ]; then
+            DESCRIPTION="${DESCRIPTION:0:147}..."
+          fi
+          
+          # Add to repository list
+          cat >> temp_repos.txt << EOF
+- [$NAME]($HTML_URL)
+  - Description: $DESCRIPTION
+  - Languages Used: $LANGUAGE
+  - Last Updated: $FORMATTED_DATE
+
+EOF
+        done
+        
+        # Read the current README
+        cp README.md README_backup.md
+        
+        # Find the start and end markers
+        START_LINE=$(grep -n "<!-- REPO-LIST-START -->" README.md | cut -d: -f1)
+        END_LINE=$(grep -n "<!-- REPO-LIST-END -->" README.md | cut -d: -f1)
+        
+        if [ -n "$START_LINE" ] && [ -n "$END_LINE" ]; then
+          echo "Updating repository list..."
+          
+          # Create new README with updated repository list
+          head -n $START_LINE README.md > README_new.md
+          
+          # Add the repository list
+          if [ -f temp_repos.txt ]; then
+            cat temp_repos.txt >> README_new.md
+          fi
+          
+          # Add the rest of the README
+          tail -n +$END_LINE README.md >> README_new.md
+          
+          # Replace the original README
+          mv README_new.md README.md
+          
+          echo "✅ README.md updated successfully!"
+        else
+          echo "❌ Could not find repository section markers in README.md"
+          exit 1
+        fi
+        
+        # Clean up temporary files
+        rm -f temp_repos.txt README_backup.md
+        
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add README.md
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "🤖 Auto-update README with latest repositories"
+          git push
+        fi
