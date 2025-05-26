@@ -39,35 +39,36 @@
 
 ## 📂 **Repositories**
 <!-- REPO-LIST-START -->
-- [EventMania](https://github.com/kushyanthpothi/EventMania)
-  - Description: Event Mania is a dynamic platform connecting students and colleges through events. Discover, register, and manage events effortlessly with this all-in-one event management solution!
-  - Languages Used: JavaScript
-  - Last Updated: 11-02-2025
+- [employeerecordsystem](https://github.com/kushyanthpothi/employeerecordsystem)
+  - Description: This Django-based Employee Record System is a web application designed to manage employee information efficiently. It allows administrators to add,...
+  - Languages Used: CSS
+  - Last Updated: 26-05-2025
+
+- [ProReader](https://github.com/kushyanthpothi/ProReader)
+  - Description: Pro Reader is a versatile Android app that simplifies text-related tasks, offering features like QR code scanning, speech-to-text, text-to-speech, ...
+  - Languages Used: Java
+  - Last Updated: 19-04-2025
 
 - [instans](https://github.com/kushyanthpothi/instans)
-  - Description: Instans is an AI-powered interview preparation assistant that combines real-time screen sharing with intelligent chat capabilities. The platform leverages Google's Generative AI to provide personalized interview coaching, technical problem-solving guidance, and resume analysis. With features like voice input, dark/light theme support.
+  - Description: Instans is an AI-powered interview preparation assistant that combines real-time screen sharing with intelligent chat capabilities. The platform le...
+  - Languages Used: JavaScript
+  - Last Updated: 05-03-2025
+
+- [EventMania](https://github.com/kushyanthpothi/EventMania)
+  - Description: Event Mania is a web based platform connecting students and colleges through events. Discover, register, and manage events effortlessly with this a...
   - Languages Used: JavaScript
   - Last Updated: 28-02-2025
 
-- [kushyanthpothi](https://github.com/kushyanthpothi/kushyanthpothi)
-  - Description: Config files for my GitHub profile.
-  - Languages Used: JavaScript
-  - Last Updated: 23-02-2025
+- [ytdownloader](https://github.com/kushyanthpothi/ytdownloader)
+  - Description: Django-based YouTube video and audio downloader with resolution selection and format conversion support. Features include downloading videos in MP4...
+  - Languages Used: HTML
+  - Last Updated: 28-02-2025
 
 - [pin-noter](https://github.com/kushyanthpothi/pin-noter)
-  - Description: Pin-Noter is a sleek and powerful React-based note-taking application designed for seamless note management. With an intuitive UI and a modern design, users can effortlessly create, edit, delete, and pin notes, enhancing productivity like never before.
+  - Description: Pin-Noter is a sleek and powerful React-based note-taking application designed for seamless note management. With an intuitive UI and a modern desi...
   - Languages Used: JavaScript
-  - Last Updated: 19-02-2025
+  - Last Updated: 28-02-2025
 
-- [ProReader](https://github.com/kushyanthpothi/ProReader)
-  - Description: Pro Reader is a versatile Android app that simplifies text-related tasks, offering features like QR code scanning, speech-to-text, text-to-speech, and image-to-text conversion. Empower your productivity with this all-in-one tool!
-  - Languages Used: Java
-  - Last Updated: 19-02-2025
-
-- [ytdownloader](https://github.com/kushyanthpothi/ytdownloader)
-  - Description: Django-based YouTube video and audio downloader with resolution selection and format conversion support. Features include downloading videos in MP4 and audio in MP3 formats with smooth functionality.
-  - Languages Used: HTML
-  - Last Updated: 02-01-2025
 <!-- REPO-LIST-END -->
 
 > **Note:** This section dynamically updates as new repositories are added.
