@@ -2,57 +2,34 @@ name: 🧠 Update README with Repos
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # daily midnight UTC
-  workflow_dispatch:
+    - cron: '0 0 * * *' # Every day at midnight
+  workflow_dispatch:    # Allow manual trigger
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install jq (safety net)
-        run: sudo apt-get update && sudo apt-get install -y jq
-
-      - name: Fetch repos and update README
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Fetch repositories and update README
         run: |
-          echo "=== Fetching repos from GitHub API ==="
-          curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/users/kushyanthpothi/repos?per_page=100 > response.json
+          curl -s https://api.github.com/users/kushyanthpothi/repos?per_page=100 | \
+          jq -r '.[] | "- [\(.name)](\(.html_url))"' > repo_list.md
 
-          echo "=== API response preview ==="
-          head -40 response.json
-
-          echo "=== Generating repo markdown table ==="
-          echo '| 🧰 Repo | 📄 Description | 🛠 Language | ⭐ Stars | 🕒 Last Updated |' > repo_list.md
-          echo '|--------|----------------|-------------|---------|-----------------|' >> repo_list.md
-
-          jq -r '
-            .[] |
-            select(.archived == false) |
-            "| [\(.name)](\(.html_url)) | \(.description // "No description") | \(.language // "N/A") | ⭐ \(.stargazers_count) | \(.updated_at | sub("T.*";"") | fromdate | strftime("%B %d, %Y")) |"
-          ' response.json >> repo_list.md
-
-          echo "=== repo_list.md contents ==="
-          cat repo_list.md
-
-          echo "=== Updating README.md ==="
           awk '/<!--START_SECTION:repo_list-->/ {
-            print;
+            print; 
             while (getline < "repo_list.md") print;
             found=1; next
           }
           /<!--END_SECTION:repo_list-->/ {found=0}
           !found' README.md > temp.md && mv temp.md README.md
 
-      - name: Commit & push changes
+      - name: Commit changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
+          git pull --rebase # Pull remote changes and rebase local commits
           git add README.md
-          git diff --cached --quiet || git commit -m "🔄 Update repo list in README"
+          git commit -m "🔄 Updated repo list" || echo "No changes to commit"
           git push
