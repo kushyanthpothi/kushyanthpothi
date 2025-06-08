@@ -14,11 +14,30 @@ jobs:
 
       - name: Fetch repositories and update README
         run: |
-          curl -s https://api.github.com/users/kushyanthpothi/repos?per_page=100 | \
-          jq -r '.[] | "- [\(.name)](\(.html_url))"' > repo_list.md
+          # Fetch repos JSON, parse name, url, description, updated_at
+          curl -s https://api.github.com/users/kushyanthpothi/repos?per_page=100 | jq -r '
+            .[] | 
+            [
+              .name, 
+              .html_url, 
+              (.description // "No description"), 
+              .updated_at
+            ] | @tsv
+          ' > repos.tsv
 
+          # Create markdown with formatted date and columns
+          echo "" > repo_list.md
+          while IFS=$'\t' read -r name url desc updated; do
+            # Format updated date to YYYY-MM-DD (GitHub ISO format)
+            formatted_date=$(date -d "$updated" +"%Y-%m-%d")
+            # Escape markdown special chars in description (basic)
+            safe_desc=$(echo "$desc" | sed 's/\\/\\\\/g; s/\[/\\[/g; s/\]/\\]/g')
+            echo "- [${name}](${url}) — ${safe_desc} _(Updated on ${formatted_date})_" >> repo_list.md
+          done < repos.tsv
+
+          # Inject updated repo list between markers in README.md
           awk '/<!--START_SECTION:repo_list-->/ {
-            print; 
+            print;
             while (getline < "repo_list.md") print;
             found=1; next
           }
