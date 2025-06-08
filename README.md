@@ -38,8 +38,9 @@
 ---
 
 ## 📂 **Repositories**
-<!--START_SECTION:repo_list-->
-<!--END_SECTION:repo_list-->
+<!-- REPOSITORY_LIST_START -->
+<!-- This section will be automatically updated by GitHub Actions -->
+<!-- REPOSITORY_LIST_END -->
 
 > **Note:** This section dynamically updates as new repositories are added.
 
