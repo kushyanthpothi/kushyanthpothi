@@ -1,3 +1,4 @@
+# .github/workflows/update-readme.yml
 name: 🧠 Update README with Repos
 
 on:
@@ -10,20 +11,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository (full history)
+      # 1. Full clone so rebase will work
+      - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0       # ← ensures you can pull/rebase
+          fetch-depth: 0
 
-      - name: Configure Git user
+      # 2. Git config
+      - name: Configure Git
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Sync with remote main
-        run: git pull --rebase origin main
+      # 3. Sync remote → local
+      - name: Pull & rebase from main
+        run: |
+          git fetch origin main
+          git rebase origin/main
 
-      - name: Fetch repos & build markdown
+      # 4. Fetch GitHub repos & build markdown
+      - name: Generate repo list
         run: |
           curl -s "https://api.github.com/users/kushyanthpothi/repos?per_page=100" | \
             jq -r '
@@ -36,35 +43,38 @@ jobs:
               ] | @tsv
             ' > repos.tsv
 
-          echo "" > repo_list.md
-          while IFS=$'\t' read -r name url desc updated; do
-            fmt_date=$(date -d "$updated" +"%Y-%m-%d")
-            safe_desc=$(printf '%s' "$desc" \
-              | sed 's/\\/\\\\/g; s/\[/\\[/g; s/\]/\\]/g; s/*/\\*/g')
-            {
+          # Build Markdown with sub-bullets
+          {
+            echo "" 
+            while IFS=$'\t' read -r name url desc updated; do
+              fmt=$(date -d "$updated" +"%Y-%m-%d")
+              safe=$(printf '%s' "$desc" \
+                | sed 's/\\/\\\\/g; s/\[/\\[/g; s/\]/\\]/g; s/*/\\*/g')
               echo "- [$name]($url)"
-              echo "  - Description: $safe_desc"
-              echo "  - Updated on: $fmt_date"
+              echo "  - Description: $safe"
+              echo "  - Updated on: $fmt"
               echo ""
-            }
-          done < repos.tsv >> repo_list.md
+            done < repos.tsv
+          } > repo_list.md
 
+          # Inject into README
           awk '
             /<!--START_SECTION:repo_list-->/ {
-              print; 
-              while ((getline line < "repo_list.md") > 0) print line;
+              print
+              while ((getline l < "repo_list.md") > 0) print l
               skip=1; next
             }
             /<!--END_SECTION:repo_list-->/ {skip=0}
             skip!=1
-          ' README.md > temp.md && mv temp.md README.md
+          ' README.md > tmp.md && mv tmp.md README.md
 
-      - name: Commit & push if changed
+      # 5. Commit & push if anything changed
+      - name: Commit & push
         run: |
           if git diff --quiet; then
-            echo "✔️ No changes to commit"
+            echo "✔️ README up to date—no changes."
           else
             git add README.md
-            git commit -m "🔄 Updated repo list with description & updated date"
-            git push origin main
+            git commit -m "🔄 Update repo list with description & updated date"
+            git push origin HEAD:main
           fi
