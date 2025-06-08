@@ -38,8 +38,8 @@
 ---
 
 ## 📂 **Repositories**
-<!-- REPO-LIST-START -->
-<!-- REPO-LIST-END -->
+<!--START_SECTION:repo_list-->
+<!--END_SECTION:repo_list-->
 
 > **Note:** This section dynamically updates as new repositories are added.
 
