@@ -39,13 +39,6 @@
 
 ## 📂 **Repositories**
 <!--START_SECTION:repo_list-->
-- [employeerecordsystem](https://github.com/kushyanthpothi/employeerecordsystem)
-- [EventMania](https://github.com/kushyanthpothi/EventMania)
-- [instans](https://github.com/kushyanthpothi/instans)
-- [kushyanthpothi](https://github.com/kushyanthpothi/kushyanthpothi)
-- [pin-noter](https://github.com/kushyanthpothi/pin-noter)
-- [ProReader](https://github.com/kushyanthpothi/ProReader)
-- [ytdownloader](https://github.com/kushyanthpothi/ytdownloader)
 <!--END_SECTION:repo_list-->
 
 > **Note:** This section dynamically updates as new repositories are added.
