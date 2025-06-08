@@ -39,13 +39,14 @@
 
 ## 📂 **Repositories**
 <!--START_SECTION:repo_list-->
-- [employeerecordsystem](https://github.com/kushyanthpothi/employeerecordsystem)
-- [EventMania](https://github.com/kushyanthpothi/EventMania)
-- [instans](https://github.com/kushyanthpothi/instans)
-- [kushyanthpothi](https://github.com/kushyanthpothi/kushyanthpothi)
-- [pin-noter](https://github.com/kushyanthpothi/pin-noter)
-- [ProReader](https://github.com/kushyanthpothi/ProReader)
-- [ytdownloader](https://github.com/kushyanthpothi/ytdownloader)
+
+- [employeerecordsystem](https://github.com/kushyanthpothi/employeerecordsystem) — This Django-based Employee Record System is a web application designed to manage employee information efficiently. It allows administrators to add, view, update, and delete employee records while providing a secure authentication system for accessing the platform. _(Updated on 2025-05-26)_
+- [EventMania](https://github.com/kushyanthpothi/EventMania) — Event Mania is a web based platform connecting students and colleges through events. Discover, register, and manage events effortlessly with this all-in-one event management solution! _(Updated on 2025-02-28)_
+- [instans](https://github.com/kushyanthpothi/instans) — Instans is an AI-powered interview preparation assistant that combines real-time screen sharing with intelligent chat capabilities. The platform leverages Google's Generative AI to provide personalized interview coaching, technical problem-solving guidance, and resume analysis. With features like voice input, dark/light theme support. _(Updated on 2025-03-05)_
+- [kushyanthpothi](https://github.com/kushyanthpothi/kushyanthpothi) — Welcome to my profile you can check it out repositories  _(Updated on 2025-06-08)_
+- [pin-noter](https://github.com/kushyanthpothi/pin-noter) — Pin-Noter is a sleek and powerful React-based note-taking application designed for seamless note management. With an intuitive UI and a modern design, users can effortlessly create, edit, delete, and pin notes, enhancing productivity like never before. _(Updated on 2025-02-28)_
+- [ProReader](https://github.com/kushyanthpothi/ProReader) — Pro Reader is a versatile Android app that simplifies text-related tasks, offering features like QR code scanning, speech-to-text, text-to-speech, and image-to-text conversion. Empower your productivity with this all-in-one tool! _(Updated on 2025-04-19)_
+- [ytdownloader](https://github.com/kushyanthpothi/ytdownloader) — Django-based YouTube video and audio downloader with resolution selection and format conversion support. Features include downloading videos in MP4 and audio in MP3 formats with smooth functionality. _(Updated on 2025-02-28)_
 <!--END_SECTION:repo_list-->
 
 > **Note:** This section dynamically updates as new repositories are added.
