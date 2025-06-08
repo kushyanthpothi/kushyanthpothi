@@ -1,94 +1,34 @@
-name: Update Repository List
+name: 🧠 Update README with Repos
 
 on:
   schedule:
-    - cron: '0 6 * * *'
-  workflow_dispatch:
-  push:
-    branches: [ main ]
+    - cron: '0 0 * * *' # Every day at midnight
+  workflow_dispatch:    # Allow manual trigger
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
-
-      - name: Update README with repositories
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Fetch repositories and update README
         run: |
-          set -e
-          USERNAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f1)
-          echo "Fetching repositories for user: $USERNAME"
+          curl -s https://api.github.com/users/kushyanthpothi/repos?per_page=100 | \
+          jq -r '.[] | "- [\(.name)](\(.html_url))"' > repo_list.md
 
-          REPOS_JSON=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
-            "https://api.github.com/users/$USERNAME/repos?per_page=100&sort=updated&type=all")
+          awk '/<!--START_SECTION:repo_list-->/ {
+            print; 
+            while (getline < "repo_list.md") print;
+            found=1; next
+          }
+          /<!--END_SECTION:repo_list-->/ {found=0}
+          !found' README.md > temp.md && mv temp.md README.md
 
-          if [ ! -f "README.md" ]; then
-            echo "README.md not found!"
-            exit 1
-          fi
-
-          if ! grep -q "<!-- REPOSITORY_LIST_START -->" README.md || ! grep -q "<!-- REPOSITORY_LIST_END -->" README.md; then
-            echo "Repository tags not found in README.md"
-            echo "Please add the following tags to your README.md:"
-            echo "<!-- REPOSITORY_LIST_START -->"
-            echo "<!-- REPOSITORY_LIST_END -->"
-            exit 1
-          fi
-
-          cat > temp_repo_list.md << 'TABLE_HEADER'
-<!-- REPOSITORY_LIST_START -->
-## 📚 My Repositories
-
-| Repository | Description | Language | Stars | Last Updated |
-|------------|-------------|----------|-------|--------------|
-TABLE_HEADER
-
-          echo "$REPOS_JSON" | jq -r '.[] | select(.fork == false) | [.name, (.description // "No description"), (.language // "N/A"), .stargazers_count, .updated_at, .html_url] | @tsv' | \
-          while IFS=$'\t' read -r name description language stars updated_at url; do
-            # Clean description (remove pipes, newlines, limit length)
-            clean_desc=$(echo "$description" | tr '|' '-' | tr '\n' ' ' | sed 's/  */ /g')
-            if [ ${#clean_desc} -gt 80 ]; then
-              clean_desc="${clean_desc:0:80}..."
-            fi
-
-            formatted_date=$(echo "$updated_at" | cut -d'T' -f1)
-
-            echo "| [$name]($url) | $clean_desc | $language | ⭐ $stars | $formatted_date |" >> temp_repo_list.md
-          done
-
-          cat >> temp_repo_list.md << 'TABLE_FOOTER'
-
-*Updated automatically via GitHub Actions*
-<!-- REPOSITORY_LIST_END -->
-TABLE_FOOTER
-
-          cp README.md README_backup.md
-
-          sed '/<!-- REPOSITORY_LIST_START -->/,$d' README.md > temp_readme_start.md
-          sed '1,/<!-- REPOSITORY_LIST_END -->/d' README.md > temp_readme_end.md
-          cat temp_readme_start.md temp_repo_list.md temp_readme_end.md > README.md
-
-          # rm README_backup.md  # Keep backup for safety
-          rm temp_repo_list.md temp_readme_start.md temp_readme_end.md
-
-          echo "README.md updated successfully!"
-
-      - name: Commit and push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit changes
         run: |
-          git config --local user.email "kushyanthpothineni2003@gmail.com"
-          git config --local user.name "kushyanthpothi"
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add README.md
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "🤖 Auto-update repository list - $(date +'%Y-%m-%d %H:%M:%S')"
-            git push
+          git commit -m "🔄 Updated repo list" || echo "No changes to commit"
+          git push
