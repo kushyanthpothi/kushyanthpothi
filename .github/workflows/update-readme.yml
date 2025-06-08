@@ -2,8 +2,8 @@ name: 🧠 Update README with Repos
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight UTC
-  workflow_dispatch:      # Manual trigger from GitHub UI
+    - cron: '0 0 * * *'  # daily midnight UTC
+  workflow_dispatch:
 
 jobs:
   update-readme:
@@ -13,27 +13,42 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Fetch repositories and generate markdown table
+      - name: Install jq (safety net)
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Fetch repos and update README
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "=== Fetching repos from GitHub API ==="
+          curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/users/kushyanthpothi/repos?per_page=100 > response.json
+
+          echo "=== API response preview ==="
+          head -40 response.json
+
+          echo "=== Generating repo markdown table ==="
           echo '| 🧰 Repo | 📄 Description | 🛠 Language | ⭐ Stars | 🕒 Last Updated |' > repo_list.md
           echo '|--------|----------------|-------------|---------|-----------------|' >> repo_list.md
 
-          curl -s https://api.github.com/users/kushyanthpothi/repos?per_page=100 | \
           jq -r '
             .[] |
             select(.archived == false) |
             "| [\(.name)](\(.html_url)) | \(.description // "No description") | \(.language // "N/A") | ⭐ \(.stargazers_count) | \(.updated_at | sub("T.*";"") | fromdate | strftime("%B %d, %Y")) |"
-          ' >> repo_list.md
+          ' response.json >> repo_list.md
 
+          echo "=== repo_list.md contents ==="
+          cat repo_list.md
+
+          echo "=== Updating README.md ==="
           awk '/<!--START_SECTION:repo_list-->/ {
-            print; 
+            print;
             while (getline < "repo_list.md") print;
             found=1; next
           }
           /<!--END_SECTION:repo_list-->/ {found=0}
           !found' README.md > temp.md && mv temp.md README.md
 
-      - name: Commit & Push if changes found
+      - name: Commit & push changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
