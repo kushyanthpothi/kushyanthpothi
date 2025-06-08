@@ -14,7 +14,7 @@ jobs:
 
       - name: Fetch repositories and update README
         run: |
-          # Fetch repo data
+          # Fetch repos JSON, parse name, url, description, updated_at
           curl -s https://api.github.com/users/kushyanthpothi/repos?per_page=100 | jq -r '
             .[] | 
             [
@@ -25,18 +25,17 @@ jobs:
             ] | @tsv
           ' > repos.tsv
 
-          # Write markdown table header
-          echo "| Name | Description | Last Updated |" > repo_list.md
-          echo "|------|-------------|--------------|" >> repo_list.md
-
-          # Append each repo row
+          # Create markdown with formatted date and columns
+          echo "" > repo_list.md
           while IFS=$'\t' read -r name url desc updated; do
+            # Format updated date to YYYY-MM-DD (GitHub ISO format)
             formatted_date=$(date -d "$updated" +"%Y-%m-%d")
-            safe_desc=$(echo "$desc" | sed 's/|/\\|/g; s/\\/\\\\/g; s/\[/\\[/g; s/\]/\\]/g')
-            echo "| [${name}](${url}) | ${safe_desc} | ${formatted_date} |" >> repo_list.md
+            # Escape markdown special chars in description (basic)
+            safe_desc=$(echo "$desc" | sed 's/\\/\\\\/g; s/\[/\\[/g; s/\]/\\]/g')
+            echo "- [${name}](${url}) — ${safe_desc} _(Updated on ${formatted_date})_" >> repo_list.md
           done < repos.tsv
 
-          # Replace content between markers
+          # Inject updated repo list between markers in README.md
           awk '/<!--START_SECTION:repo_list-->/ {
             print;
             while (getline < "repo_list.md") print;
@@ -50,5 +49,5 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add README.md
-          git commit -m "🔄 Updated repo table" || echo "No changes to commit"
+          git commit -m "🔄 Updated repo list" || echo "No changes to commit"
           git push
