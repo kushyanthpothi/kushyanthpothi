@@ -2,20 +2,23 @@ name: 🧠 Update README with Repos
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Every day at midnight
-  workflow_dispatch:    # Allow manual trigger
+    - cron: '0 0 * * *' # Runs daily at midnight
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Fetch repositories and update README
         run: |
-          # Fetch repos with required fields
-          curl -s https://api.github.com/users/kushyanthpothi/repos?per_page=100 | jq -r '
+          echo "🔍 Fetching repositories..."
+
+          # Fetch repo data as TSV (name, url, desc, updated_at)
+          curl -s "https://api.github.com/users/kushyanthpothi/repos?per_page=100" | jq -r '
             .[] | 
             [
               .name, 
@@ -25,32 +28,36 @@ jobs:
             ] | @tsv
           ' > repos.tsv
 
-          # Build markdown output
+          echo "🛠 Building repo list markdown..."
+
           echo "" > repo_list.md
           while IFS=$'\t' read -r name url desc updated; do
             formatted_date=$(date -d "$updated" +"%Y-%m-%d")
-            safe_desc=$(echo "$desc" | sed 's/\\/\\\\/g; s/\[/\\[/g; s/\]/\\]/g')
+            safe_desc=$(echo "$desc" | sed 's/\\/\\\\/g; s/\[/\\[/g; s/\]/\\]/g; s/*/\\*/g')
             {
-              echo "- [${name}](${url})"
-              echo "  - Description: ${safe_desc}"
-              echo "  - Updated on: ${formatted_date}"
+              echo "- [$name]($url)"
+              echo "  - Description: $safe_desc"
+              echo "  - Updated on: $formatted_date"
               echo ""
             } >> repo_list.md
           done < repos.tsv
 
-          # Replace the section in README
-          awk '/<!--START_SECTION:repo_list-->/ {
-            print;
-            while (getline < "repo_list.md") print;
-            found=1; next
-          }
-          /<!--END_SECTION:repo_list-->/ {found=0}
-          !found' README.md > temp.md && mv temp.md README.md
+          echo "📝 Inserting repo list into README.md..."
 
-      - name: Commit changes
+          awk '
+            /<!--START_SECTION:repo_list-->/ {
+              print;
+              while ((getline line < "repo_list.md") > 0) print line;
+              skip=1; next
+            }
+            /<!--END_SECTION:repo_list-->/ {skip=0}
+            skip != 1
+          ' README.md > temp.md && mv temp.md README.md
+
+      - name: Commit and push if changed
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git commit -m "🔄 Updated repo list with descriptions and update dates" || echo "No changes to commit"
+          git diff --cached --quiet || git commit -m "🔄 Updated repo list with description and last updated date"
           git push
