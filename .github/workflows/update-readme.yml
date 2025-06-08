@@ -2,105 +2,93 @@ name: Update Repository List
 
 on:
   schedule:
-    # Run every day at 6 AM UTC
     - cron: '0 6 * * *'
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch:
   push:
     branches: [ main ]
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-        
-    - name: Update README with repositories
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        # Get username from repository
-        USERNAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f1)
-        echo "Fetching repositories for user: $USERNAME"
-        
-        # Fetch all repositories using GitHub API
-        REPOS_JSON=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-          "https://api.github.com/users/$USERNAME/repos?per_page=100&sort=updated&type=all")
-        
-        # Check if README.md exists
-        if [ ! -f "README.md" ]; then
-          echo "README.md not found!"
-          exit 1
-        fi
-        
-        # Check if tags exist in README
-        if ! grep -q "<!-- REPOSITORY_LIST_START -->" README.md || ! grep -q "<!-- REPOSITORY_LIST_END -->" README.md; then
-          echo "Repository tags not found in README.md"
-          echo "Please add the following tags to your README.md:"
-          echo "<!-- REPOSITORY_LIST_START -->"
-          echo "<!-- REPOSITORY_LIST_END -->"
-          exit 1
-        fi
-        
-        # Create temporary file for new repository list
-        cat > temp_repo_list.md << 'TABLE_HEADER'
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Update README with repositories
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          USERNAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f1)
+          echo "Fetching repositories for user: $USERNAME"
+
+          REPOS_JSON=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+            "https://api.github.com/users/$USERNAME/repos?per_page=100&sort=updated&type=all")
+
+          if [ ! -f "README.md" ]; then
+            echo "README.md not found!"
+            exit 1
+          fi
+
+          if ! grep -q "<!-- REPOSITORY_LIST_START -->" README.md || ! grep -q "<!-- REPOSITORY_LIST_END -->" README.md; then
+            echo "Repository tags not found in README.md"
+            echo "Please add the following tags to your README.md:"
+            echo "<!-- REPOSITORY_LIST_START -->"
+            echo "<!-- REPOSITORY_LIST_END -->"
+            exit 1
+          fi
+
+          cat > temp_repo_list.md << 'TABLE_HEADER'
 <!-- REPOSITORY_LIST_START -->
 ## 📚 My Repositories
 
 | Repository | Description | Language | Stars | Last Updated |
 |------------|-------------|----------|-------|--------------|
 TABLE_HEADER
-        
-        # Process repositories (filter out forks and create table rows)
-        echo "$REPOS_JSON" | jq -r '.[] | select(.fork == false) | 
-          [.name, (.description // "No description"), (.language // "N/A"), .stargazers_count, .updated_at, .html_url] | @tsv' | \
-        while IFS=$'\t' read -r name description language stars updated_at url; do
-          # Clean description (remove pipes and newlines, limit length)
-          clean_desc=$(echo "$description" | tr '|' '-' | tr '\n' ' ' | head -c 80)
-          if [ ${#description} -gt 80 ]; then
-            clean_desc="${clean_desc}..."
-          fi
-          
-          # Format date (extract just the date part)
-          formatted_date=$(echo "$updated_at" | cut -d'T' -f1)
-          
-          # Add table row
-          echo "| [$name]($url) | $clean_desc | $language | ⭐ $stars | $formatted_date |" >> temp_repo_list.md
-        done
-        
-        # Add closing section
-        cat >> temp_repo_list.md << 'TABLE_FOOTER'
+
+          echo "$REPOS_JSON" | jq -r '.[] | select(.fork == false) | [.name, (.description // "No description"), (.language // "N/A"), .stargazers_count, .updated_at, .html_url] | @tsv' | \
+          while IFS=$'\t' read -r name description language stars updated_at url; do
+            # Clean description (remove pipes, newlines, limit length)
+            clean_desc=$(echo "$description" | tr '|' '-' | tr '\n' ' ' | sed 's/  */ /g')
+            if [ ${#clean_desc} -gt 80 ]; then
+              clean_desc="${clean_desc:0:80}..."
+            fi
+
+            formatted_date=$(echo "$updated_at" | cut -d'T' -f1)
+
+            echo "| [$name]($url) | $clean_desc | $language | ⭐ $stars | $formatted_date |" >> temp_repo_list.md
+          done
+
+          cat >> temp_repo_list.md << 'TABLE_FOOTER'
 
 *Updated automatically via GitHub Actions*
 <!-- REPOSITORY_LIST_END -->
 TABLE_FOOTER
-        
-        # Create backup of original README
-        cp README.md README_backup.md
-        
-        # Replace content between tags
-        # Extract content before start tag
-        sed '/<!-- REPOSITORY_LIST_START -->/,$d' README.md > temp_readme_start.md
-        
-        # Extract content after end tag
-        sed '1,/<!-- REPOSITORY_LIST_END -->/d' README.md > temp_readme_end.md
-        
-        # Combine all parts
-        cat temp_readme_start.md temp_repo_list.md temp_readme_end.md > README.md
-        
-        # Clean up temporary files
-        rm temp_repo_list.md temp_readme_start.md temp_readme_end.md README_backup.md
-        
-        echo "README.md updated successfully!"
-        
-    - name: Commit and push changes
-      run: |
-        git config --local user.email "kushyanthpothineni2003@gmail.com"
-        git config --local user.name "kushyanthpothi"
-        git add README.md
-        if git diff --staged --quiet; then
-          echo "No changes to commit"
-        else
-          git commit -m "🤖 Auto-update repository list - $(date +'%Y-%m-%d %H:%M:%S')"
-          git push
+
+          cp README.md README_backup.md
+
+          sed '/<!-- REPOSITORY_LIST_START -->/,$d' README.md > temp_readme_start.md
+          sed '1,/<!-- REPOSITORY_LIST_END -->/d' README.md > temp_readme_end.md
+          cat temp_readme_start.md temp_repo_list.md temp_readme_end.md > README.md
+
+          # rm README_backup.md  # Keep backup for safety
+          rm temp_repo_list.md temp_readme_start.md temp_readme_end.md
+
+          echo "README.md updated successfully!"
+
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "kushyanthpothineni2003@gmail.com"
+          git config --local user.name "kushyanthpothi"
+          git add README.md
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🤖 Auto-update repository list - $(date +'%Y-%m-%d %H:%M:%S')"
+            git push
