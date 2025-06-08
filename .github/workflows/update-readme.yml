@@ -1,64 +1,155 @@
-name: 🧠 Update README with Repos
+name: Update Repository List
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # daily midnight UTC
-  workflow_dispatch:
+    # Run every day at 6 AM UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allow manual trigger
+  push:
+    branches: [ main ]
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout repo (full history)
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        pip install requests
+        
+    - name: Update README with repositories
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        python << 'EOF'
+        import requests
+        import json
+        import os
+        from datetime import datetime
+        import re
+        
+        # Get GitHub token and username
+        token = os.environ['GITHUB_TOKEN']
+        repo_full_name = os.environ['GITHUB_REPOSITORY']
+        username = repo_full_name.split('/')[0]
+        
+        print(f"Fetching repositories for user: {username}")
+        
+        # GitHub API headers
+        headers = {
+            'Authorization': f'token {token}',
+            'Accept': 'application/vnd.github.v3+json'
+        }
+        
+        # Fetch all repositories
+        all_repos = []
+        page = 1
+        
+        while True:
+            url = f"https://api.github.com/users/{username}/repos"
+            params = {
+                'per_page': 100,
+                'page': page,
+                'sort': 'updated',
+                'type': 'all'
+            }
+            
+            response = requests.get(url, headers=headers, params=params)
+            repos = response.json()
+            
+            if not repos:
+                break
+                
+            # Filter out forks
+            non_fork_repos = [repo for repo in repos if not repo['fork']]
+            all_repos.extend(non_fork_repos)
+            
+            if len(repos) < 100:
+                break
+                
+            page += 1
+        
+        print(f"Found {len(all_repos)} repositories")
+        
+        # Read existing README
+        try:
+            with open('README.md', 'r', encoding='utf-8') as f:
+                readme_content = f.read()
+        except FileNotFoundError:
+            print("README.md not found!")
+            exit(1)
+        
+        # Generate repository list
+        repo_list = ""
+        for repo in all_repos:
+            name = repo['name']
+            description = repo['description'] or "No description"
+            # Clean description
+            description = description.replace('|', '-').replace('\n', ' ')
+            if len(description) > 80:
+                description = description[:77] + "..."
+            
+            url = repo['html_url']
+            language = repo['language'] or "N/A"
+            stars = repo['stargazers_count']
+            
+            # Format date
+            updated_at = repo['updated_at']
+            try:
+                date_obj = datetime.strptime(updated_at, "%Y-%m-%dT%H:%M:%SZ")
+                formatted_date = date_obj.strftime("%Y-%m-%d")
+            except:
+                formatted_date = updated_at[:10]
+            
+            repo_list += f"| [{name}]({url}) | {description} | {language} | ⭐ {stars} | {formatted_date} |\n"
+        
+        # Replace content between tags
+        start_tag = "<!-- REPOSITORY_LIST_START -->"
+        end_tag = "<!-- REPOSITORY_LIST_END -->"
+        
+        if start_tag in readme_content and end_tag in readme_content:
+            # Create the new section
+            new_section = f"""{start_tag}
+## 📚 My Repositories
 
-      - name: Install jq (safety net)
-        run: sudo apt-get update && sudo apt-get install -y jq
+| Repository | Description | Language | Stars | Last Updated |
+|------------|-------------|----------|-------|--------------|
+{repo_list.rstrip()}
 
-      - name: Fetch repos and update README
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "=== Fetching repos from GitHub API ==="
-          curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/users/kushyanthpothi/repos?per_page=100 > response.json
-
-          echo "=== API response preview ==="
-          head -40 response.json
-
-          echo "=== Generating repo markdown table ==="
-          echo '| 🧰 Repo | 📄 Description | 🛠 Language | ⭐ Stars | 🕒 Last Updated |' > repo_list.md
-          echo '|--------|----------------|-------------|---------|-----------------|' >> repo_list.md
-
-          jq -r '
-            .[] |
-            select(.archived == false) |
-            "| [\(.name)](\(.html_url)) | \(.description // "No description") | \(.language // "N/A") | ⭐ \(.stargazers_count) | \(.updated_at | sub("T.*";"") | fromdate | strftime("%B %d, %Y")) |"
-          ' response.json >> repo_list.md
-
-          echo "=== repo_list.md contents ==="
-          cat repo_list.md
-
-          echo "=== Updating README.md ==="
-          awk '/<!--START_SECTION:repo_list-->/ {
-            print;
-            while (getline < "repo_list.md") print;
-            found=1; next
-          }
-          /<!--END_SECTION:repo_list-->/ {found=0}
-          !found' README.md > temp.md && mv temp.md README.md
-
-      - name: Commit & push changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
-          git add README.md
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "🔄 Updated repo list"
-            git push --force-with-lease
-          fi
+*Updated automatically via GitHub Actions*
+{end_tag}"""
+            
+            # Replace the section
+            pattern = f"{re.escape(start_tag)}.*?{re.escape(end_tag)}"
+            updated_content = re.sub(pattern, new_section, readme_content, flags=re.DOTALL)
+            
+            # Write updated README
+            with open('README.md', 'w', encoding='utf-8') as f:
+                f.write(updated_content)
+            
+            print("README.md updated successfully!")
+        else:
+            print("Repository tags not found in README.md")
+            print("Please add the following tags to your README.md:")
+            print("<!-- REPOSITORY_LIST_START -->")
+            print("<!-- REPOSITORY_LIST_END -->")
+        EOF
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "kushyanthpothineni2003@gmail.com"
+        git config --local user.name "kushyanthpothi"
+        git add README.md
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "🤖 Auto-update repository list - $(date +'%Y-%m-%d %H:%M:%S')"
+          git push
