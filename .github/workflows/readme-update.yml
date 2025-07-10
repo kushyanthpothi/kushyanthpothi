@@ -1,0 +1,57 @@
+name: 🧠 Update README with Repos
+on:
+  schedule:
+    - cron: '0 0 * * *' # Every day at midnight
+  workflow_dispatch:    # Allow manual trigger
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch repositories and update README
+        run: |
+          # Fetch repos JSON, parse name, url, description, updated_at
+          curl -s https://api.github.com/users/kushyanthpothi/repos?per_page=100 | jq -r '
+            .[] | 
+            [
+              .name, 
+              .html_url, 
+              (.description // "No description"), 
+              .updated_at
+            ] | @tsv
+          ' > repos.tsv
+          
+          # Create markdown with formatted date and columns
+          echo "" > repo_list.md
+          while IFS=$'\t' read -r name url desc updated; do
+            # Format updated date to YYYY-MM-DD (GitHub ISO format)
+            formatted_date=$(date -d "$updated" +"%Y-%m-%d")
+            # Escape markdown special chars in description (basic)
+            safe_desc=$(echo "$desc" | sed 's/\\/\\\\/g; s/\[/\\[/g; s/\]/\\]/g')
+            echo "- [${name}](${url}) — ${safe_desc} *(Updated on ${formatted_date})*" >> repo_list.md
+          done < repos.tsv
+          
+          # Inject updated repo list between markers in README.md
+          awk '/<!--START_SECTION:repo_list-->/ {
+            print;
+            while (getline < "repo_list.md") print;
+            found=1; next
+          }
+          /<!--END_SECTION:repo_list-->/ {found=0}
+          !found' README.md > temp.md && mv temp.md README.md
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "🔄 Updated repo list"
+          file_pattern: "README.md"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
