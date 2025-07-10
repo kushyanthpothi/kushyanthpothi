@@ -48,6 +48,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin main
           git add README.md
           git commit -m "🔄 Updated repo list" || echo "No changes to commit"
           git push
