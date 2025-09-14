@@ -324,6 +324,7 @@ export default function Home() {
     { name: 'EXPERIENCE', section: 'experience' },
     { name: 'SKILLS', section: 'skills' },
     { name: 'PROJECTS', section: 'projects' },
+    { name: 'YOUTUBE ANALYZER', href: '/youtube-analyzer' },
     { name: 'CERTIFICATIONS', section: 'certifications' },
     { name: 'CONTACT', section: 'contact' },
   ];
@@ -444,13 +445,23 @@ export default function Home() {
                   {/* Desktop Navigation */}
                   <div className="hidden md:flex space-x-8">
                     {navItems.map((item) => (
-                      <button
-                        key={item.name}
-                        onClick={() => scrollToSection(item.section)}
-                        className={`text-sm font-medium tracking-wider ${themeClass('text')} transition-colors cursor-pointer`}
-                      >
-                        {item.name}
-                      </button>
+                      item.href ? (
+                        <a
+                          key={item.name}
+                          href={item.href}
+                          className={`text-sm font-medium tracking-wider ${themeClass('text')} transition-colors cursor-pointer`}
+                        >
+                          {item.name}
+                        </a>
+                      ) : (
+                        <button
+                          key={item.name}
+                          onClick={() => scrollToSection(item.section)}
+                          className={`text-sm font-medium tracking-wider ${themeClass('text')} transition-colors cursor-pointer`}
+                        >
+                          {item.name}
+                        </button>
+                      )
                     ))}
                   </div>
 
@@ -491,13 +502,23 @@ export default function Home() {
               >
                 <div className="px-2 pt-2 pb-3 space-y-1">
                   {navItems.map((item) => (
-                    <button
-                      key={item.name}
-                      onClick={() => scrollToSection(item.section)}
-                      className={`block w-full px-3 py-2 text-center rounded-md ${themeClass('bg')} bg-opacity-30 backdrop-blur-sm hover:bg-opacity-50 ${themeClass('text')} transition-colors cursor-pointer`}
-                    >
-                      {item.name}
-                    </button>
+                    item.href ? (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={`block w-full px-3 py-2 text-center rounded-md ${themeClass('bg')} bg-opacity-30 backdrop-blur-sm hover:bg-opacity-50 ${themeClass('text')} transition-colors cursor-pointer`}
+                      >
+                        {item.name}
+                      </a>
+                    ) : (
+                      <button
+                        key={item.name}
+                        onClick={() => scrollToSection(item.section)}
+                        className={`block w-full px-3 py-2 text-center rounded-md ${themeClass('bg')} bg-opacity-30 backdrop-blur-sm hover:bg-opacity-50 ${themeClass('text')} transition-colors cursor-pointer`}
+                      >
+                        {item.name}
+                      </button>
+                    )
                   ))}
                 </div>
               </MotionDiv>

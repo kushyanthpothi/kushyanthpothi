@@ -16,7 +16,14 @@
     "next": "15.3.0",
     "react": "^19.0.0",
     "react-countup": "^6.5.3",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "axios": "^1.6.2",
+    "ytdl-core": "^4.11.5",
+    "openai": "^4.24.0",
+    "youtube-transcript": "^1.0.6",
+    "chart.js": "^4.4.0",
+    "react-chartjs-2": "^5.2.0",
+    "recharts": "^2.8.0"
   },
   "devDependencies": {
     "postcss": "^8",

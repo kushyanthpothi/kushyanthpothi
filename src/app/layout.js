@@ -1,12 +1,5 @@
-import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "@/components/ClientLayout";
-
-const nunitoSans = Nunito_Sans({
-  subsets: ["latin"],
-  variable: "--font-nunito-sans",
-  weight: ['200', '300', '400', '500', '600', '700', '800', '900', '1000'],
-});
 
 export const metadata = {
   metadataBase: new URL("https://kushyanth-portfolio.web.app"),
@@ -698,7 +691,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={`${nunitoSans.variable} font-nunito antialiased`}>
+      <body className="font-sans antialiased">
         <ClientLayout>
           {children}
         </ClientLayout>
