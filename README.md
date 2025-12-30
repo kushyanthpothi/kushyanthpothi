@@ -90,7 +90,7 @@ Building production-grade backend systems and AI automation:
 
 <!--START_SECTION:repo_list-->
 
-- [cartly](https://github.com/kushyanthpothi/cartly) — A conversational shopping app that helps users discover products, compare prices, and checkout seamlessly through chat using MCP protocol. *(Updated on 2025-12-28)*
+- [cartly](https://github.com/kushyanthpothi/cartly) — A conversational shopping app that helps users discover products, compare prices, and checkout seamlessly through chat using MCP protocol. *(Updated on 2025-12-29)*
 - [employeerecordsystem](https://github.com/kushyanthpothi/employeerecordsystem) — This Django-based Employee Record System is a web application designed to manage employee information efficiently. It allows administrators to add, view, update, and delete employee records while providing a secure authentication system for accessing the platform. *(Updated on 2025-05-26)*
 - [EventMania](https://github.com/kushyanthpothi/EventMania) — Event Mania is a web based platform connecting students and colleges through events. Discover, register, and manage events effortlessly with this all-in-one event management solution! *(Updated on 2025-12-08)*
 - [instans](https://github.com/kushyanthpothi/instans) — Instans is an AI-powered interview preparation assistant that combines real-time screen sharing with intelligent chat capabilities. The platform leverages Google's Generative AI to provide personalized interview coaching, technical problem-solving guidance, and resume analysis. With features like voice input, dark/light theme support. *(Updated on 2025-03-05)*
