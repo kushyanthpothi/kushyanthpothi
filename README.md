@@ -1,92 +1,138 @@
-<!-- Profile Banner with Typing Animation -->
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=4000&pause=1000&color=36BCF7&center=true&vCenter=true&width=700&height=60&lines=%F0%9F%91%8B+Hey+there!+I'm+Kushyanth+Pothineni;%E2%9A%A1+Software+Development+Engineer;%F0%9F%9A%80+Building+Scalable+Systems+%26+AI+Solutions!" />
-</p>
+<!-- HEADER -->
+<div align="center">
 
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=kushyanthpothi&label=Profile%20Views&color=0e75b6&style=flat-square" alt="Profile Views" />
-</p>
+```
+██╗  ██╗██╗   ██╗███████╗██╗  ██╗██╗   ██╗ █████╗ ███╗   ██╗████████╗██╗  ██╗
+██║ ██╔╝██║   ██║██╔════╝██║  ██║╚██╗ ██╔╝██╔══██╗████╗  ██║╚══██╔══╝██║  ██║
+█████╔╝ ██║   ██║███████╗███████║ ╚████╔╝ ███████║██╔██╗ ██║   ██║   ███████║
+██╔═██╗ ██║   ██║╚════██║██╔══██║  ╚██╔╝  ██╔══██║██║╚██╗██║   ██║   ██╔══██║
+██║  ██╗╚██████╔╝███████║██║  ██║   ██║   ██║  ██║██║ ╚████║   ██║   ██║  ██║
+╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝
+```
 
----
+<img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=18&duration=3000&pause=1000&color=00FF88&center=true&vCenter=true&width=600&height=45&lines=SDE+%40+Ninjacart+%7C+Bangalore%2C+India;Backend+%26+AI+Systems+Engineer;Model+Context+Protocol+%7C+Kafka+%7C+Spring+Boot;Building+things+that+scale+%E2%86%97" alt="Typing SVG" />
 
-## 👨‍💻 **About Me**
+<br/>
 
-**Software Development Engineer @ Ninjacart** | **Full-Stack Developer** | **AI Enthusiast**
+[![Profile Views](https://komarev.com/ghpvc/?username=kushyanthpothi&label=PROFILE+VIEWS&color=00ff88&style=flat-square)](https://github.com/kushyanthpothi)
+[![LinkedIn](https://img.shields.io/badge/LINKEDIN-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kushyanth-pothineni/)
+[![Portfolio](https://img.shields.io/badge/PORTFOLIO-FF5722?style=flat-square&logo=vercel&logoColor=white)](https://kushyanth-portfolio.web.app/)
+[![Email](https://img.shields.io/badge/EMAIL-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:pothineni.kushyanth@gmail.com)
 
-Currently building production systems at Ninjacart, where I develop backend microservices and AI-powered automation that process 5,000+ requests daily. My work focuses on creating scalable solutions that eliminate manual workflows and improve system reliability.
-
-- 🔧 Building microservices with **Spring Boot** handling 10K+ daily active users
-- 🤖 Implementing **AI automation workflows** that reduce manual ops work by 60%
-- ⚡ Optimizing systems for **40% faster response times** and **99.5% uptime**
-- 🌱 Deep diving into **distributed systems, cloud architecture, and machine learning**
-- 🎓 Mentoring at **Scaler Academy** on problem-solving and system design
-
----
-
-## 💼 **Professional Experience**
-
-### **Ninjacart** — *Software Development Engineer*
-**June 2025 - Present** | Bangalore, India
-
-Building production-grade backend systems and AI automation:
-- Engineered an **n8n AI automation** using OCR and Generative AI to extract invoice data, map products to internal catalog, and automate delivery updates
-- Developed a **Spring Boot microservice** for document verification that filters fake user registrations and validates authenticity
-- Built a **centralized credential manager** securing API keys, database credentials, and service tokens across workflow services
-- **Tech Stack:** Java, Spring Boot, Python, n8n, Kafka, Redis, PostgreSQL, MySQL, AWS, MCP, Generative AI, OCR, Jenkins, Docker
-
-### **Ninjacart** — *Software Development Intern*
-**April 2025 - June 2025** | Bangalore, India
-
-- Built **8 production REST APIs** with Spring Boot, integrating OCR and ML models to automate document processing workflows
-- Accelerated AI response times by **40%** through Model Context Protocol (MCP) integration (1.2s → 720ms latency)
-- Optimized PostgreSQL queries and schema design, reducing execution time by **55%** for endpoints serving 10K+ daily users
-- Achieved **99.5% uptime** handling 5,000+ daily requests
+</div>
 
 ---
 
-## 🛠️ **Tech Stack**
+## `$ whoami`
 
-### **Languages**
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=java,python,cpp,javascript,typescript,sql" />
-</p>
-
-### **Backend & Cloud**
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=spring,nodejs,express,django,aws,azure,docker,kubernetes,kafka,redis,mysql,postgres,firebase" />
-</p>
-
-### **Frontend & Tools**
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=react,angular,nextjs,html,css,tailwind,figma,git,github" />
-</p>
-
-### **AI & DevOps**
-- **AI/ML:** Generative AI (Gemini), OCR, Model Context Protocol (MCP), TensorFlow
-- **DevOps:** Jenkins, Docker, Kubernetes, Grafana, Elasticsearch, N8N, Spark
+```yaml
+name:       Kushyanth Pothineni
+role:       Software Development Engineer
+company:    Ninjacart, Bangalore
+education:  B.Tech CS — KKR & KSR Institute of Technology & Sciences (2021–2025)
+focus:
+  - Event-driven microservices (Kafka, Spring Boot)
+  - AI/agentic systems (MCP, LangGraph, RAG)
+  - Workflow automation (n8n, LLM pipelines)
+  - Full-stack product development
+cert:       Anthropic MCP Certification (Mar 2026)
+```
 
 ---
 
-## 🏆 **GitHub Stats & Activity**
+## `$ cat experience.log`
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=kushyanthpothi&show_icons=true&theme=react&include_all_commits=true&count_private=true&hide_border=true" width="48%" alt="GitHub Stats"/>
-  <img src="https://github-readme-streak-stats.herokuapp.com?user=kushyanthpothi&theme=react&hide_border=true" width="48%" alt="GitHub Streak"/>
-</p>
+### ▸ Ninjacart — Software Development Engineer `[Jun 2025 → Present]`
 
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=kushyanthpothi&theme=react-dark&hide_border=true&area=true" width="95%" alt="GitHub Activity"/>
-</p>
+```
+[PROD] Built MCP map client integrated into an enterprise AI platform — enabling natural
+       language interaction with internal APIs across 130+ Horeca enterprise clients
+
+[PROD] Engineered Kafka-based microservices for real-time event streaming and
+       async document processing across distributed backend services
+
+[PROD] Developed LLM-powered invoice extraction pipeline using OCR + Generative AI
+       to auto-map products to internal catalog and trigger delivery updates
+
+[PROD] Built WhatsApp-to-ticketing chat support workflow — routes messages, 
+       classifies intent, and creates support tickets without human intervention
+
+[PROD] Led Horeca workflow automation & migration system serving 130+ enterprise clients
+
+Stack → Java · Spring Boot · Python · Kafka · Redis · PostgreSQL · MySQL
+        AWS · Docker · Jenkins · n8n · MCP · Generative AI · OCR
+```
+
+### ▸ Ninjacart — SDE Intern `[Apr 2025 → Jun 2025]`
+
+```
+[PROD] Built 8 production REST APIs integrating OCR + ML models for document 
+       processing workflows
+
+[PERF] Cut AI response latency 40% via MCP integration (1.2s → 720ms)
+
+[PERF] Optimized PostgreSQL schema & queries — 55% faster execution across 
+       endpoints serving 10K+ daily users
+
+[UPTIME] Maintained 99.5% uptime handling 5,000+ daily requests
+```
 
 ---
 
-## 📂 **My Repositories**
+## `$ ls -la skills/`
 
 <div align="center">
 
-### 🚀 **Explore My Open Source Projects**
+### Languages
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![C++](https://img.shields.io/badge/C++-00599C?style=flat-square&logo=cplusplus&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=postgresql&logoColor=white)
+
+### Backend & Infrastructure
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=spring-boot&logoColor=white)
+![Apache Kafka](https://img.shields.io/badge/Apache_Kafka-231F20?style=flat-square&logo=apache-kafka&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-FF9900?style=flat-square&logo=amazonaws&logoColor=white)
+![GCP](https://img.shields.io/badge/GCP-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
+
+### Frontend
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat-square&logo=angular&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
+
+### AI / Agentic
+![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square&logo=langchain&logoColor=white)
+![LangGraph](https://img.shields.io/badge/LangGraph-412991?style=flat-square)
+![MCP](https://img.shields.io/badge/Model_Context_Protocol-00FF88?style=flat-square&logo=anthropic&logoColor=black)
+![n8n](https://img.shields.io/badge/n8n-EA4B71?style=flat-square&logo=n8n&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white)
 
 </div>
+
+---
+
+## `$ git log --oneline --stat`
+
+<div align="center">
+<img src="https://github-readme-stats.vercel.app/api?username=kushyanthpothi&show_icons=true&theme=chartreuse-dark&include_all_commits=true&count_private=true&hide_border=true&bg_color=0d1117&title_color=00ff88&icon_color=00ff88&text_color=c9d1d9" width="48%" />
+<img src="https://github-readme-streak-stats.herokuapp.com?user=kushyanthpothi&theme=dark&hide_border=true&background=0d1117&stroke=00ff88&ring=00ff88&fire=ff6b35&currStreakLabel=00ff88&dates=8b949e" width="48%" />
+</div>
+
+<div align="center">
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=kushyanthpothi&theme=react-dark&hide_border=true&area=true&area_color=00ff88&line=00ff88&point=ffffff&bg_color=0d1117" width="96%" />
+</div>
+
+---
+
+## `$ ls repos/ --sort=updated`
 
 <!--START_SECTION:repo_list-->
 
@@ -101,67 +147,48 @@ Building production-grade backend systems and AI automation:
 - [rag-chatbot](https://github.com/kushyanthpothi/rag-chatbot) — this is a RAG based chat application which it can consume the document and convert it into embeddings and the model can use the embeddings to provide the answers it was developed using python (backend) and vite (frontend) *(Updated on 2026-04-05)*
 - [smart-inventary-tracker](https://github.com/kushyanthpothi/smart-inventary-tracker) — Smart Inventory Tracker is a full-stack web application that helps warehouse managers monitor stock levels in real time. It features role-based access control, automated low-stock alerts, and interactive dashboard visualizations. The system is built with Spring Boot, React, and MySQL, and deployed on AWS using Docker for scalability. *(Updated on 2025-07-10)*
 - [ytdownloader](https://github.com/kushyanthpothi/ytdownloader) — Django-based YouTube video and audio downloader with resolution selection and format conversion support. Features include downloading videos in MP4 and audio in MP3 formats with smooth functionality. *(Updated on 2025-02-28)*
+
 <!--END_SECTION:repo_list-->
+
+> Repositories are auto-updated · ⭐ Star what you find useful
+
+---
+
+## `$ cat education.txt`
+
+```
+Institution  :  KKR & KSR Institute of Technology and Sciences
+Degree       :  B.Tech — Computer Science & Engineering
+Period       :  Nov 2021 – Jun 2025
+CGPA         :  8.06 / 10.0
+
+Coursework   :  Data Structures & Algorithms · Operating Systems · DBMS
+                Computer Networks · Machine Learning · Distributed Systems
+                Image Processing
+```
+
+---
+
+## `$ cat certs.txt`
+
+```
+[2026-03]  Anthropic MCP Certification
+[active]   Mentor @ Scaler Academy — problem-solving, coding, system design
+[–]        Java Full Stack Development — Wipro
+[–]        Machine Learning & Deep Learning Specialization — Coursera
+```
+
+---
 
 <div align="center">
 
----
+```
+// currently compiling...
+while (alive) { eat(); sleep(); code(); ship(); }
+```
 
-**💡 Repositories are dynamically updated** | ⭐ **Star projects you find interesting!**
+**[`LinkedIn`](https://www.linkedin.com/in/kushyanth-pothineni/) · [`Portfolio`](https://kushyanth-portfolio.web.app/) · [`Email`](mailto:pothineni.kushyanth@gmail.com) · [`GitHub`](https://github.com/kushyanthpothi)**
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=00ff88,0d1117&height=80&section=footer&reversal=true"/>
 
 </div>
-
----
-
-## 🎓 **Education**
-
-**KKR & KSR Institute of Technology and Sciences**  
-*B.E. in Computer Science and Engineering* | CGPA: 8.06/10  
-*November 2021 - June 2025*
-
-**Relevant Coursework:** Data Structures & Algorithms, Operating Systems, Database Management, Computer Networks, Machine Learning, Distributed Systems, Image Processing
-
----
-
-## 🏅 **Certifications & Mentorship**
-
-- **Mentor at Scaler Academy** — Guiding students and professionals in problem-solving, coding, and system design
-- **Java Full Stack Development** — Wipro
-- **Machine Learning and Deep Learning Specialization** — Coursera
-
----
-
-## 📫 **Connect With Me**
-
-<p align="center">
-  <a href="https://www.linkedin.com/in/kushyanth-pothineni/">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-  </a>
-  <a href="https://kushyanth-portfolio.web.app/">
-    <img src="https://img.shields.io/badge/Portfolio-FF5722?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Portfolio" />
-  </a>
-  <a href="mailto:pothineni.kushyanth@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
-  </a>
-  <a href="https://github.com/kushyanthpothi">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-  </a>
-</p>
-
----
-
-## 💡 **What Drives Me**
-
-I'm passionate about building systems that solve real problems at scale. Whether it's automating workflows that save hours of manual work, optimizing database queries for faster performance, or integrating AI to make smarter decisions — I love the challenge of making technology more efficient and accessible.
-
-When I'm not coding, you'll find me exploring new frameworks, diving into system design patterns, or helping others level up their programming skills through mentorship.
-
----
-
-<p align="center">
-  <i>⚡ "Solving complex problems, one commit at a time" ⚡</i>
-</p>
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=100&section=footer"/>
-</p>
